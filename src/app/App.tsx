@@ -7,6 +7,26 @@ const mockData = {
     {
       id: 1,
       name: 'Nairobi Center',
+      branches: [
+        { id: 'nai-1', name: 'Nairobi Branch A' },
+        { id: 'nai-2', name: 'Nairobi Branch B' },
+        { id: 'nai-3', name: 'Nairobi Branch C' }
+      ],
+      classes: [
+        { id: 'nai-crib-1', name: 'Crib A', type: 'crib' },
+        { id: 'nai-crib-2', name: 'Crib B', type: 'crib' },
+        { id: 'nai-clicker-1', name: 'Clicker A', type: 'clicker' },
+        { id: 'nai-quest-1', name: 'Quest A', type: 'quest' },
+        { id: 'nai-quest-2', name: 'Quest B', type: 'quest' }
+      ],
+      lessons: [
+        { id: 'l1', classId: 'nai-crib-1', number: 1, title: 'Intro to Crib', scheduledAt: '2026-05-01T09:00:00Z', completed: true },
+        { id: 'l2', classId: 'nai-crib-1', number: 2, title: 'Crib Basics', scheduledAt: '2026-05-08T09:00:00Z', completed: true },
+        { id: 'l3', classId: 'nai-crib-1', number: 3, title: 'Crib Advanced', scheduledAt: '2026-05-15T09:00:00Z', completed: false },
+        { id: 'l4', classId: 'nai-clicker-1', number: 1, title: 'Clicker Intro', scheduledAt: '2026-05-03T11:00:00Z', completed: true },
+        { id: 'l5', classId: 'nai-quest-1', number: 1, title: 'Quest Kickoff', scheduledAt: '2026-05-10T10:00:00Z', completed: false },
+        { id: 'l6', classId: 'nai-quest-2', number: 1, title: 'Quest B Start', scheduledAt: '2026-05-12T10:00:00Z', completed: false }
+      ],
       teachers: { total: 45, active: 38, inactive: 7, online: 12 },
       learners: { total: 320, active: 285, inactive: 35, online: 89 },
       parents: { total: 298, active: 245, inactive: 53, online: 67 },
@@ -30,6 +50,20 @@ const mockData = {
     {
       id: 2,
       name: 'Mombasa Center',
+      branches: [
+        { id: 'mom-1', name: 'Mombasa Branch A' },
+        { id: 'mom-2', name: 'Mombasa Branch B' }
+      ],
+      classes: [
+        { id: 'mom-crib-1', name: 'Crib A', type: 'crib' },
+        { id: 'mom-clicker-1', name: 'Clicker A', type: 'clicker' },
+        { id: 'mom-quest-1', name: 'Quest A', type: 'quest' }
+      ],
+      lessons: [
+        { id: 'm-l1', classId: 'mom-crib-1', number: 1, title: 'Crib Intro', scheduledAt: '2026-04-28T09:00:00Z', completed: true },
+        { id: 'm-l2', classId: 'mom-crib-1', number: 2, title: 'Crib Followup', scheduledAt: '2026-05-05T09:00:00Z', completed: true },
+        { id: 'm-l3', classId: 'mom-clicker-1', number: 1, title: 'Clicker Start', scheduledAt: '2026-05-20T11:00:00Z', completed: false }
+      ],
       teachers: { total: 32, active: 28, inactive: 4, online: 9 },
       learners: { total: 245, active: 218, inactive: 27, online: 65 },
       parents: { total: 228, active: 195, inactive: 33, online: 52 },
@@ -53,6 +87,18 @@ const mockData = {
     {
       id: 3,
       name: 'Kisumu Center',
+      branches: [
+        { id: 'kis-1', name: 'Kisumu Branch A' }
+      ],
+      classes: [
+        { id: 'kis-crib-1', name: 'Crib A', type: 'crib' },
+        { id: 'kis-quest-1', name: 'Quest A', type: 'quest' }
+      ],
+      lessons: [
+        { id: 'k-l1', classId: 'kis-crib-1', number: 1, title: 'Crib 1', scheduledAt: '2026-04-20T09:00:00Z', completed: true },
+        { id: 'k-l2', classId: 'kis-crib-1', number: 2, title: 'Crib 2', scheduledAt: '2026-04-27T09:00:00Z', completed: true },
+        { id: 'k-l3', classId: 'kis-quest-1', number: 1, title: 'Quest 1', scheduledAt: '2026-05-14T09:00:00Z', completed: false }
+      ],
       teachers: { total: 28, active: 24, inactive: 4, online: 7 },
       learners: { total: 198, active: 172, inactive: 26, online: 48 },
       parents: { total: 185, active: 158, inactive: 27, online: 41 },
@@ -76,6 +122,18 @@ const mockData = {
     {
       id: 4,
       name: 'Eldoret Center',
+      branches: [
+        { id: 'eld-1', name: 'Eldoret Branch A' },
+        { id: 'eld-2', name: 'Eldoret Branch B' }
+      ],
+      classes: [
+        { id: 'eld-crib-1', name: 'Crib A', type: 'crib' },
+        { id: 'eld-clicker-1', name: 'Clicker A', type: 'clicker' }
+      ],
+      lessons: [
+        { id: 'e-l1', classId: 'eld-crib-1', number: 1, title: 'Crib Intro', scheduledAt: '2026-04-15T09:00:00Z', completed: true },
+        { id: 'e-l2', classId: 'eld-clicker-1', number: 1, title: 'Clicker Intro', scheduledAt: '2026-05-18T11:00:00Z', completed: false }
+      ],
       teachers: { total: 22, active: 19, inactive: 3, online: 6 },
       learners: { total: 165, active: 148, inactive: 17, online: 42 },
       parents: { total: 152, active: 132, inactive: 20, online: 35 },
@@ -349,6 +407,10 @@ function OverviewView({ centers, totals, dropdownOpen, setDropdownOpen, handleCe
                   </div>
                 </div>
 
+                <div className="mb-4">
+                  <CenterStats center={center} />
+                </div>
+
                 <div className="space-y-2">
                   <div className="flex items-center justify-between text-sm">
                     <span className="text-gray-600">Completion Rate</span>
@@ -387,6 +449,12 @@ function OverviewView({ centers, totals, dropdownOpen, setDropdownOpen, handleCe
 function CenterDetailView({ center }) {
   return (
     <div className="space-y-6">
+      <div>
+        <CenterStats center={center} />
+      </div>
+      <div>
+        <ClassScheduleView center={center} />
+      </div>
       {/* Role Statistics */}
       <div className="grid grid-cols-2 gap-6">
         <RoleStatsCard
@@ -617,6 +685,153 @@ function MetricCard({ label, value, unit, color }) {
       <div className="text-sm text-gray-600 mb-2">{label}</div>
       <div className={`text-4xl font-bold ${colors[color]}`}>
         {value}{unit}
+      </div>
+    </div>
+  );
+}
+
+function CenterStats({ center }) {
+  const branches = center.branches || [];
+  const branchCount = branches.length;
+
+  const classes = center.classes || [];
+  const classCounts = classes.reduce((acc, c) => {
+    acc[c.type] = (acc[c.type] || 0) + 1;
+    return acc;
+  }, {});
+
+  const lessons = center.lessons || [];
+  const totalLessons = lessons.length;
+  const completedLessons = lessons.filter(l => l.completed).length;
+
+  const upcoming = lessons
+    .filter(l => !l.completed)
+    .sort((a, b) => {
+      const at = a.scheduledAt ? new Date(a.scheduledAt).getTime() : Infinity;
+      const bt = b.scheduledAt ? new Date(b.scheduledAt).getTime() : Infinity;
+      return at - bt;
+    })[0] || null;
+
+  const formatDate = (iso) => {
+    try { return iso ? new Date(iso).toLocaleString() : ''; } catch (e) { return iso; }
+  };
+
+  return (
+    <div className="bg-gray-50 p-3 rounded-md border border-gray-100 text-sm text-gray-700">
+      <div className="flex flex-wrap items-center gap-4">
+        <div className="flex items-center gap-2">
+          <span className="font-semibold">Branches:</span>
+          <span>{branchCount}</span>
+        </div>
+
+        <div className="flex items-center gap-3">
+          <span className="font-semibold">Classes:</span>
+          <span>Crib {classCounts.crib || 0}</span>
+          <span>Clicker {classCounts.clicker || 0}</span>
+          <span>Quest {classCounts.quest || 0}</span>
+        </div>
+
+        <div className="flex items-center gap-2">
+          <span className="font-semibold">Lessons:</span>
+          <span>{completedLessons}/{totalLessons} completed</span>
+        </div>
+
+        {upcoming && (
+          <div className="ml-auto text-right">
+            <div className="text-xs text-gray-600">Next</div>
+            <div className="font-semibold text-gray-900">
+              {upcoming.title} <span className="text-gray-500">({formatDate(upcoming.scheduledAt)})</span>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function ClassScheduleView({ center }) {
+  const [expanded, setExpanded] = useState({});
+  const classes = center.classes || [];
+  const lessons = center.lessons || [];
+
+  const toggle = (id) => setExpanded(prev => ({ ...prev, [id]: !prev[id] }));
+
+  const formatDate = (iso) => {
+    try { return iso ? new Date(iso).toLocaleString() : ''; } catch (e) { return iso; }
+  };
+
+  return (
+    <div className="bg-white rounded-lg border border-gray-200 p-4">
+      <div className="flex items-center justify-between mb-4">
+        <h3 className="text-lg font-semibold text-gray-900">Classes & Schedule</h3>
+      </div>
+
+      <div className="space-y-3">
+        {classes.length === 0 && (
+          <div className="text-sm text-gray-600">No classes found for this center.</div>
+        )}
+
+        {classes.map((cls) => {
+          const clsLessons = lessons.filter(l => l.classId === cls.id) || [];
+          const total = clsLessons.length;
+          const completed = clsLessons.filter(l => l.completed).length;
+          const upcoming = clsLessons.filter(l => !l.completed).sort((a,b)=>{
+            const at = a.scheduledAt ? new Date(a.scheduledAt).getTime() : Infinity;
+            const bt = b.scheduledAt ? new Date(b.scheduledAt).getTime() : Infinity;
+            return at-bt;
+          })[0] || null;
+
+          return (
+            <div key={cls.id} className="bg-gray-50 p-3 rounded-md border border-gray-100">
+              <div className="flex items-start gap-4">
+                <div className="flex-1">
+                  <div className="flex items-center gap-2">
+                    <div className="text-sm font-semibold text-gray-900">{cls.name}</div>
+                    <div className="text-xs text-gray-500 px-2 py-0.5 bg-white border rounded">{cls.type}</div>
+                  </div>
+                  <div className="text-sm text-gray-600 mt-1">{completed}/{total} lessons completed</div>
+                  {upcoming && (
+                    <div className="text-xs text-gray-500 mt-1">Next: {upcoming.title} — {formatDate(upcoming.scheduledAt)}</div>
+                  )}
+                </div>
+
+                <div className="flex items-center gap-3">
+                  <div className="w-36 bg-gray-200 rounded-full h-2 overflow-hidden">
+                    <div
+                      className="bg-green-500 h-2 rounded-full"
+                      style={{ width: total === 0 ? '0%' : `${Math.round((completed/total)*100)}%` }}
+                    />
+                  </div>
+                  <button
+                    onClick={() => toggle(cls.id)}
+                    className="text-sm text-blue-600 hover:underline"
+                  >
+                    {expanded[cls.id] ? 'Hide' : 'View lessons'}
+                  </button>
+                </div>
+              </div>
+
+              {expanded[cls.id] && (
+                <div className="mt-3 border-t border-gray-100 pt-3">
+                  <ul className="space-y-2">
+                    {clsLessons.length === 0 && (
+                      <li className="text-sm text-gray-600">No lessons scheduled for this class.</li>
+                    )}
+                    {clsLessons.map((l) => (
+                      <li key={l.id} className="flex items-center justify-between text-sm">
+                        <div>
+                          <div className="font-medium text-gray-900">Lesson {l.number}: {l.title}</div>
+                          <div className="text-xs text-gray-500">{formatDate(l.scheduledAt)} — {l.completed ? 'Completed' : 'Pending'}</div>
+                        </div>
+                        <div className="text-xs text-gray-600">{l.completed ? '✅' : '⏳'}</div>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+          );
+        })}
       </div>
     </div>
   );

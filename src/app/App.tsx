@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { ChevronDown, Users, GraduationCap, UserCheck, Wrench, FileText, ClipboardList } from 'lucide-react';
 
+// Mock data
 const mockData = {
   centers: [
     {
@@ -25,47 +26,6 @@ const mockData = {
         { id: 'l4', classId: 'nai-clicker-1', number: 1, title: 'Clicker Intro', scheduledAt: '2026-05-03T11:00:00Z', completed: true },
         { id: 'l5', classId: 'nai-quest-1', number: 1, title: 'Quest Kickoff', scheduledAt: '2026-05-10T10:00:00Z', completed: false },
         { id: 'l6', classId: 'nai-quest-2', number: 1, title: 'Quest B Start', scheduledAt: '2026-05-12T10:00:00Z', completed: false }
-      ],
-      courses: [
-        {
-          id: 'c-nai-1',
-          title: 'Introduction to Coding',
-          type: 'crib',
-          students: 42,
-          sessions: [
-            { id: 'c-nai-1-s1', number: 1, title: 'Intro', scheduledAt: '2026-05-01T09:00:00Z', completed: true },
-            { id: 'c-nai-1-s2', number: 2, title: 'Variables', scheduledAt: '2026-05-08T09:00:00Z', completed: true },
-            { id: 'c-nai-1-s3', number: 3, title: 'Loops', scheduledAt: '2026-05-15T09:00:00Z', completed: false }
-          ]
-        },
-        {
-          id: 'c-nai-2',
-          title: 'Story Development',
-          type: 'crib',
-          students: 30,
-          sessions: [
-            { id: 'c-nai-2-s1', number: 1, title: 'Story Basics', scheduledAt: '2026-05-02T10:00:00Z', completed: true },
-            { id: 'c-nai-2-s2', number: 2, title: 'Plot Development', scheduledAt: '2026-05-09T10:00:00Z', completed: false }
-          ]
-        },
-        {
-          id: 'c-nai-3',
-          title: 'Clicker Basics',
-          type: 'clicker',
-          students: 25,
-          sessions: [
-            { id: 'c-nai-3-s1', number: 1, title: 'Clicker Intro', scheduledAt: '2026-05-03T11:00:00Z', completed: true }
-          ]
-        },
-        {
-          id: 'c-nai-4',
-          title: 'Quest Fundamentals',
-          type: 'quest',
-          students: 20,
-          sessions: [
-            { id: 'c-nai-4-s1', number: 1, title: 'Quest Kickoff', scheduledAt: '2026-05-10T10:00:00Z', completed: false }
-          ]
-        }
       ],
       teachers: { total: 45, active: 38, inactive: 7, online: 12 },
       learners: { total: 320, active: 285, inactive: 35, online: 89 },
@@ -104,10 +64,6 @@ const mockData = {
         { id: 'm-l2', classId: 'mom-crib-1', number: 2, title: 'Crib Followup', scheduledAt: '2026-05-05T09:00:00Z', completed: true },
         { id: 'm-l3', classId: 'mom-clicker-1', number: 1, title: 'Clicker Start', scheduledAt: '2026-05-20T11:00:00Z', completed: false }
       ],
-      courses: [
-        { id: 'c-mom-1', title: 'Crib: Basics', type: 'crib', students: 28, sessions: [ { id: 'c-mom-1-s1', number:1, title:'Intro', scheduledAt:'2026-04-28T09:00:00Z', completed:true } ] },
-        { id: 'c-mom-2', title: 'Clicker Intro', type: 'clicker', students: 22, sessions: [ { id: 'c-mom-2-s1', number:1, title:'Start', scheduledAt:'2026-05-20T11:00:00Z', completed:false } ] }
-      ],
       teachers: { total: 32, active: 28, inactive: 4, online: 9 },
       learners: { total: 245, active: 218, inactive: 27, online: 65 },
       parents: { total: 228, active: 195, inactive: 33, online: 52 },
@@ -143,9 +99,6 @@ const mockData = {
         { id: 'k-l2', classId: 'kis-crib-1', number: 2, title: 'Crib 2', scheduledAt: '2026-04-27T09:00:00Z', completed: true },
         { id: 'k-l3', classId: 'kis-quest-1', number: 1, title: 'Quest 1', scheduledAt: '2026-05-14T09:00:00Z', completed: false }
       ],
-      courses: [
-        { id: 'c-kis-1', title: 'Crib: Foundations', type: 'crib', students: 18, sessions: [ { id: 'c-kis-1-s1', number:1, title:'Foundations', scheduledAt:'2026-04-20T09:00:00Z', completed:true } ] }
-      ],
       teachers: { total: 28, active: 24, inactive: 4, online: 7 },
       learners: { total: 198, active: 172, inactive: 26, online: 48 },
       parents: { total: 185, active: 158, inactive: 27, online: 41 },
@@ -180,9 +133,6 @@ const mockData = {
       lessons: [
         { id: 'e-l1', classId: 'eld-crib-1', number: 1, title: 'Crib Intro', scheduledAt: '2026-04-15T09:00:00Z', completed: true },
         { id: 'e-l2', classId: 'eld-clicker-1', number: 1, title: 'Clicker Intro', scheduledAt: '2026-05-18T11:00:00Z', completed: false }
-      ],
-      courses: [
-        { id: 'c-eld-1', title: 'Crib Intro Course', type: 'crib', students: 14, sessions: [ { id: 'c-eld-1-s1', number:1, title:'Intro', scheduledAt:'2026-04-15T09:00:00Z', completed:true } ] }
       ],
       teachers: { total: 22, active: 19, inactive: 3, online: 6 },
       learners: { total: 165, active: 148, inactive: 17, online: 42 },
@@ -244,18 +194,10 @@ export default function App() {
   const handleCenterSelect = (center) => {
     setSelectedCenter(center);
     setDropdownOpen(false);
-    if (typeof window !== 'undefined' && window.scrollTo) {
-      // scroll to top so the center detail starts at the top of the page
-      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-    }
   };
 
   const handleBackToOverview = () => {
     setSelectedCenter(null);
-    setDropdownOpen(false);
-    if (typeof window !== 'undefined' && window.scrollTo) {
-      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-    }
   };
 
   return (
@@ -344,25 +286,56 @@ function OverviewView({ centers, totals, dropdownOpen, setDropdownOpen, handleCe
           <div className="grid grid-cols-4 gap-6">
             <div className="text-center">
               <div className="text-sm text-gray-600 mb-2">Total Users</div>
-              <div className="text-4xl font-bold text-brand-primary">{allUsers.total}</div>
+              <div className="text-4xl font-bold text-gray-900">{allUsers.total}</div>
             </div>
             <div className="text-center">
               <div className="text-sm text-gray-600 mb-2">Active (90 days)</div>
-              <div className="text-4xl font-bold text-brand-info">{allUsers.active}</div>
+              <div className="text-4xl font-bold text-green-600">{allUsers.active}</div>
             </div>
             <div className="text-center">
               <div className="text-sm text-gray-600 mb-2">Inactive (90 days)</div>
-              <div className="text-4xl font-bold text-brand-accent">{allUsers.inactive}</div>
+              <div className="text-4xl font-bold text-red-600">{allUsers.inactive}</div>
             </div>
             <div className="text-center">
               <div className="text-sm text-gray-600 mb-2">Online (today)</div>
-              <div className="text-4xl font-bold text-brand-info">{allUsers.online}</div>
+              <div className="text-4xl font-bold text-blue-600">{allUsers.online}</div>
             </div>
           </div>
         </div>
       </div>
 
-      
+      {/* Center Selector */}
+      <div className="relative inline-block">
+        <button
+          onClick={() => setDropdownOpen(!dropdownOpen)}
+          className="bg-white border border-gray-300 rounded-lg px-4 py-2 flex items-center gap-2 hover:bg-gray-50 transition-colors min-w-64"
+        >
+          <span className="text-gray-700">
+            All Centers Overview
+          </span>
+          <ChevronDown className="w-4 h-4 text-gray-500" />
+        </button>
+
+        {dropdownOpen && (
+          <div className="absolute top-full mt-2 bg-white border border-gray-200 rounded-lg shadow-lg z-10 min-w-64">
+            <button
+              onClick={handleBackToOverview}
+              className="w-full text-left px-4 py-2 hover:bg-gray-50 border-b border-gray-100"
+            >
+              All Centers Overview
+            </button>
+            {centers.map((center) => (
+              <button
+                key={center.id}
+                onClick={() => handleCenterSelect(center)}
+                className="w-full text-left px-4 py-2 hover:bg-gray-50"
+              >
+                {center.name}
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
 
       {/* Role Statistics - Overview */}
       <div className="grid grid-cols-2 gap-6">
@@ -394,37 +367,8 @@ function OverviewView({ centers, totals, dropdownOpen, setDropdownOpen, handleCe
 
       {/* Centers Table */}
       <div className="bg-white rounded-lg border border-gray-200">
-        <div className="p-6 border-b border-gray-200 flex items-center justify-between">
+        <div className="p-6 border-b border-gray-200">
           <h2 className="text-xl font-semibold text-gray-900">Centers Overview</h2>
-          <div className="relative inline-block">
-            <button
-              onClick={() => setDropdownOpen(!dropdownOpen)}
-              className="bg-white border border-gray-300 rounded-lg px-3 py-1.5 flex items-center gap-2 hover:bg-gray-50 transition-colors text-sm"
-            >
-              <span className="text-gray-700">All Centers Overview</span>
-              <ChevronDown className="w-4 h-4 text-gray-500" />
-            </button>
-
-            {dropdownOpen && (
-              <div className="absolute right-0 top-full mt-2 bg-white border border-gray-200 rounded-lg shadow-lg z-10 min-w-48">
-                <button
-                  onClick={() => { handleBackToOverview(); setDropdownOpen(false); }}
-                  className="w-full text-left px-4 py-2 hover:bg-gray-50 border-b border-gray-100"
-                >
-                  All Centers Overview
-                </button>
-                {centers.map((c) => (
-                  <button
-                    key={c.id}
-                    onClick={() => { handleCenterSelect(c); setDropdownOpen(false); }}
-                    className="w-full text-left px-4 py-2 hover:bg-gray-50"
-                  >
-                    {c.name}
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
         </div>
         <div className="p-6">
           <div className="grid grid-cols-2 gap-6">
@@ -435,11 +379,11 @@ function OverviewView({ centers, totals, dropdownOpen, setDropdownOpen, handleCe
                 className="bg-white border-2 border-gray-200 rounded-lg p-6 hover:border-blue-500 hover:shadow-md transition-all text-left group"
               >
                 <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-lg font-semibold text-gray-900 group-hover-brand-primary transition-colors">
+                  <h3 className="text-lg font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">
                     {center.name}
                   </h3>
                   <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 bg-brand-info rounded-full"></div>
+                    <div className="w-2 h-2 bg-green-500 rounded-full"></div>
                     <span className="text-sm text-gray-600">Active</span>
                   </div>
                 </div>
@@ -447,32 +391,34 @@ function OverviewView({ centers, totals, dropdownOpen, setDropdownOpen, handleCe
                 <div className="grid grid-cols-4 gap-4 mb-4">
                   <div className="text-center">
                     <div className="text-xs text-gray-600 mb-1">Teachers</div>
-                    <div className="text-lg font-bold text-brand-primary">{center.teachers.total}</div>
+                    <div className="text-lg font-bold text-gray-900">{center.teachers.total}</div>
                   </div>
                   <div className="text-center">
                     <div className="text-xs text-gray-600 mb-1">Learners</div>
-                    <div className="text-lg font-bold text-brand-primary">{center.learners.total}</div>
+                    <div className="text-lg font-bold text-gray-900">{center.learners.total}</div>
                   </div>
                   <div className="text-center">
                     <div className="text-xs text-gray-600 mb-1">Parents</div>
-                    <div className="text-lg font-bold text-brand-primary">{center.parents.total}</div>
+                    <div className="text-lg font-bold text-gray-900">{center.parents.total}</div>
                   </div>
                   <div className="text-center">
                     <div className="text-xs text-gray-600 mb-1">Mentors</div>
-                    <div className="text-lg font-bold text-brand-primary">{center.technicalMentors.total}</div>
+                    <div className="text-lg font-bold text-gray-900">{center.technicalMentors.total}</div>
                   </div>
                 </div>
 
-                {/* CenterStats removed from overview card per request */}
+                <div className="mb-4">
+                  <CenterStats center={center} />
+                </div>
 
                 <div className="space-y-2">
                   <div className="flex items-center justify-between text-sm">
                     <span className="text-gray-600">Completion Rate</span>
-                    <span className="font-semibold text-brand-primary">{center.studentMetrics.completionRate}%</span>
+                    <span className="font-semibold text-gray-900">{center.studentMetrics.completionRate}%</span>
                   </div>
                   <div className="w-full bg-gray-200 rounded-full h-2">
                     <div 
-                      className="bg-brand-primary h-2 rounded-full transition-all"
+                      className="bg-green-500 h-2 rounded-full transition-all"
                       style={{ width: `${center.studentMetrics.completionRate}%` }}
                     ></div>
                   </div>
@@ -482,14 +428,14 @@ function OverviewView({ centers, totals, dropdownOpen, setDropdownOpen, handleCe
                   <div className="flex items-center gap-4 text-sm">
                     <div>
                       <span className="text-gray-600">Pass Rate: </span>
-                      <span className="font-semibold text-brand-info">{center.studentMetrics.passRate}%</span>
+                      <span className="font-semibold text-blue-600">{center.studentMetrics.passRate}%</span>
                     </div>
                     <div>
                       <span className="text-gray-600">Drop Rate: </span>
-                      <span className="font-semibold text-brand-accent">{center.studentMetrics.dropRate}%</span>
+                      <span className="font-semibold text-red-600">{center.studentMetrics.dropRate}%</span>
                     </div>
                   </div>
-                  <ChevronDown className="w-5 h-5 text-gray-400 group-hover-brand-primary transition-colors rotate-[-90deg]" />
+                  <ChevronDown className="w-5 h-5 text-gray-400 group-hover:text-blue-600 transition-colors rotate-[-90deg]" />
                 </div>
               </button>
             ))}
@@ -501,23 +447,14 @@ function OverviewView({ centers, totals, dropdownOpen, setDropdownOpen, handleCe
 }
 
 function CenterDetailView({ center }) {
-  const recentWeek = (center.weeklyAssignments && center.weeklyAssignments.length)
-    ? center.weeklyAssignments[center.weeklyAssignments.length - 1]
-    : null;
-
-  const recentWeekMetrics = recentWeek ? {
-    issued: recentWeek.issued || 0,
-    submitted: recentWeek.submitted || 0,
-    retries: recentWeek.retries || 0,
-    graded: recentWeek.graded || 0,
-    submittedPct: recentWeek.issued ? (recentWeek.submitted / recentWeek.issued) * 100 : 0,
-    retryPct: recentWeek.submitted ? (recentWeek.retries / recentWeek.submitted) * 100 : 0,
-    gradedPct: recentWeek.issued ? (recentWeek.graded / recentWeek.issued) * 100 : 0
-  } : null;
-
   return (
     <div className="space-y-6">
-      {/* CenterStats removed from detail view */}
+      <div>
+        <CenterStats center={center} />
+      </div>
+      <div>
+        <ClassScheduleView center={center} />
+      </div>
       {/* Role Statistics */}
       <div className="grid grid-cols-2 gap-6">
         <RoleStatsCard
@@ -574,81 +511,40 @@ function CenterDetailView({ center }) {
             </div>
           </div>
 
-          {/* Weekly Assignments - card view */}
+          {/* Weekly Assignments */}
           <div>
             <h3 className="text-sm font-medium text-gray-700 mb-3">Weekly Breakdown</h3>
-            <div className="flex gap-4 overflow-x-auto py-2">
-              {recentWeek && recentWeekMetrics ? (
-                <div key={recentWeek.week} className="min-w-[220px] bg-gray-50 border border-gray-100 rounded-lg p-4">
-                  <div className="flex items-center justify-between mb-2">
-                    <div className="text-sm font-semibold text-gray-900">{recentWeek.week}</div>
-                    <div className="text-xs text-gray-500"><span className="text-brand-primary font-semibold">{recentWeekMetrics.issued}</span> issued</div>
-                  </div>
-
-                  <div className="text-xs text-gray-500 mb-1">Submitted</div>
-                  <div className="w-full bg-gray-200 rounded-full h-2 mb-2">
-                    <div className="progress-submitted h-2 rounded-full" style={{ width: `${Math.round(recentWeekMetrics.submittedPct)}%` }} />
-                  </div>
-                  <div className="flex justify-between text-xs text-gray-600 mb-2">
-                    <div>Submitted: <span className="text-brand-primary font-medium">{recentWeekMetrics.submitted}</span></div>
-                    <div><span className="text-brand-info font-medium">{recentWeekMetrics.issued ? `${recentWeekMetrics.submittedPct.toFixed(0)}%` : '0%'}</span></div>
-                  </div>
-
-                  <div className="text-xs text-gray-500 mb-1">Retries</div>
-                  <div className="w-full bg-gray-200 rounded-full h-2 mb-2">
-                    <div className="progress-retries h-2 rounded-full" style={{ width: `${Math.round(recentWeekMetrics.retryPct)}%` }} />
-                  </div>
-                  <div className="flex justify-between text-xs text-gray-600 mb-2">
-                    <div>Retries: <span className="text-brand-primary font-medium">{recentWeekMetrics.retries}</span></div>
-                    <div><span className="text-brand-accent font-medium">{recentWeekMetrics.submitted ? `${recentWeekMetrics.retryPct.toFixed(0)}%` : '0%'}</span></div>
-                  </div>
-
-                  <div className="text-xs text-gray-500 mb-1">Graded</div>
-                  <div className="w-full bg-gray-200 rounded-full h-2 mb-2">
-                    <div className="progress-graded h-2 rounded-full" style={{ width: `${Math.round(recentWeekMetrics.gradedPct)}%` }} />
-                  </div>
-                  <div className="flex justify-between text-xs text-gray-600">
-                    <div>Graded: <span className="text-brand-primary font-medium">{recentWeekMetrics.graded}</span></div>
-                    <div><span className="text-brand-primary font-medium">{recentWeekMetrics.issued ? `${recentWeekMetrics.gradedPct.toFixed(0)}%` : '0%'}</span></div>
-                  </div>
-                </div>
-              ) : (
-                /* Fallback: derive a simple weekly summary from overall assignments */
-                (() => {
-                  const issuedAll = center.assignments?.issued || 0;
-                  const weeklyApprox = issuedAll ? Math.max(1, Math.round(issuedAll / 4)) : 20;
-                  const todayApprox = Math.min(weeklyApprox, Math.max(1, Math.round(weeklyApprox / 7)));
-                  const activities = [
-                    { id: 'a1', label: 'Issued', count: Math.round(weeklyApprox * 0.6) },
-                    { id: 'a2', label: 'Submitted', count: Math.round(weeklyApprox * 0.45) },
-                    { id: 'a3', label: 'Graded', count: Math.round(weeklyApprox * 0.35) }
-                  ];
-
-                  return (
-                    <div className="min-w-[260px] bg-gray-50 border border-gray-100 rounded-lg p-4">
-                      <div className="flex items-center justify-between mb-2">
-                        <div className="text-sm font-semibold text-gray-900">This week</div>
-                        <div className="text-xs text-gray-500"><span className="text-brand-primary font-semibold">{weeklyApprox}</span> assignments</div>
-                      </div>
-
-                      <div className="text-sm text-gray-700 mb-3">Today: <span className="text-brand-info font-semibold">{todayApprox}</span> events</div>
-
-                      <div className="text-sm text-gray-600 mb-2">Recent activity</div>
-                      <ul className="space-y-2 text-sm text-gray-600">
-                        {activities.map((a) => (
-                          <li key={a.id} className="flex items-center justify-between">
-                            <div className="flex items-center gap-2">
-                              <div className="w-2 h-2 rounded-full bg-brand-primary" />
-                              <div>{a.label} today</div>
-                            </div>
-                            <div className="text-brand-primary font-medium">{a.count}</div>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  );
-                })()
-              )}
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead className="bg-gray-50 border-b border-gray-200">
+                  <tr>
+                    <th className="text-left px-4 py-2 text-sm font-medium text-gray-700">Week</th>
+                    <th className="text-right px-4 py-2 text-sm font-medium text-gray-700">Issued</th>
+                    <th className="text-right px-4 py-2 text-sm font-medium text-gray-700">Submitted</th>
+                    <th className="text-right px-4 py-2 text-sm font-medium text-gray-700">Retries</th>
+                    <th className="text-right px-4 py-2 text-sm font-medium text-gray-700">Retry %</th>
+                    <th className="text-right px-4 py-2 text-sm font-medium text-gray-700">Graded</th>
+                    <th className="text-right px-4 py-2 text-sm font-medium text-gray-700">Graded %</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-200">
+                  {center.weeklyAssignments.map((week, index) => (
+                    <tr key={index}>
+                      <td className="px-4 py-3 text-sm text-gray-900">{week.week}</td>
+                      <td className="px-4 py-3 text-sm text-right text-gray-700">{week.issued}</td>
+                      <td className="px-4 py-3 text-sm text-right text-gray-700">{week.submitted}</td>
+                      <td className="px-4 py-3 text-sm text-right text-gray-700">{week.retries}</td>
+                      <td className="px-4 py-3 text-sm text-right text-gray-700">
+                        {(week.retries / week.submitted * 100).toFixed(1)}%
+                      </td>
+                      <td className="px-4 py-3 text-sm text-right text-gray-700">{week.graded}</td>
+                      <td className="px-4 py-3 text-sm text-right text-gray-700">
+                        {(week.graded / week.issued * 100).toFixed(1)}%
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
@@ -706,10 +602,10 @@ function CenterDetailView({ center }) {
 
 function SummaryCard({ icon, label, value, color }) {
   const colors = {
-    blue: 'bg-brand-info-50 text-brand-info',
-    green: 'bg-brand-primary-50 text-brand-primary',
-    purple: 'bg-brand-accent-50 text-brand-accent',
-    orange: 'bg-brand-accent-50 text-brand-accent'
+    blue: 'bg-blue-50 text-blue-600',
+    green: 'bg-green-50 text-green-600',
+    purple: 'bg-purple-50 text-purple-600',
+    orange: 'bg-orange-50 text-orange-600'
   };
 
   return (
@@ -717,7 +613,7 @@ function SummaryCard({ icon, label, value, color }) {
       <div className={`w-12 h-12 rounded-lg ${colors[color]} flex items-center justify-center mb-3`}>
         {icon}
       </div>
-      <div className="text-2xl font-bold text-brand-primary">{value}</div>
+      <div className="text-2xl font-bold text-gray-900">{value}</div>
       <div className="text-sm text-gray-600 mt-1">{label}</div>
     </div>
   );
@@ -725,10 +621,10 @@ function SummaryCard({ icon, label, value, color }) {
 
 function RoleStatsCard({ title, icon, stats, color }) {
   const colors = {
-    blue: 'bg-brand-info-50 text-brand-info',
-    green: 'bg-brand-primary-50 text-brand-primary',
-    purple: 'bg-brand-accent-50 text-brand-accent',
-    orange: 'bg-brand-accent-50 text-brand-accent'
+    blue: 'bg-blue-50 text-blue-600',
+    green: 'bg-green-50 text-green-600',
+    purple: 'bg-purple-50 text-purple-600',
+    orange: 'bg-orange-50 text-orange-600'
   };
 
   return (
@@ -745,19 +641,19 @@ function RoleStatsCard({ title, icon, stats, color }) {
         <div className="grid grid-cols-2 gap-4">
           <div>
             <div className="text-sm text-gray-600 mb-1">Total</div>
-            <div className="text-2xl font-bold text-brand-primary">{stats.total}</div>
+            <div className="text-2xl font-bold text-gray-900">{stats.total}</div>
           </div>
           <div>
             <div className="text-sm text-gray-600 mb-1">Active (90 days)</div>
-            <div className="text-2xl font-bold text-brand-primary">{stats.active}</div>
+            <div className="text-2xl font-bold text-gray-900">{stats.active}</div>
           </div>
           <div>
             <div className="text-sm text-gray-600 mb-1">Inactive (90 days)</div>
-            <div className="text-2xl font-bold text-brand-primary">{stats.inactive}</div>
+            <div className="text-2xl font-bold text-gray-900">{stats.inactive}</div>
           </div>
           <div>
             <div className="text-sm text-gray-600 mb-1">Online (today)</div>
-            <div className="text-2xl font-bold text-brand-primary">{stats.online}</div>
+            <div className="text-2xl font-bold text-gray-900">{stats.online}</div>
           </div>
         </div>
       </div>
@@ -769,9 +665,9 @@ function StatBox({ label, value, percentage }) {
   return (
     <div className="bg-gray-50 rounded-lg p-4">
       <div className="text-sm text-gray-600 mb-1">{label}</div>
-      <div className="text-xl font-bold text-brand-primary">{value}</div>
+      <div className="text-xl font-bold text-gray-900">{value}</div>
       {percentage && (
-        <div className="text-sm text-brand-info mt-1">{percentage}%</div>
+        <div className="text-sm text-gray-500 mt-1">{percentage}%</div>
       )}
     </div>
   );
@@ -779,9 +675,9 @@ function StatBox({ label, value, percentage }) {
 
 function MetricCard({ label, value, unit, color }) {
   const colors = {
-    green: 'text-brand-primary',
-    blue: 'text-brand-info',
-    red: 'text-brand-accent'
+    green: 'text-green-600',
+    blue: 'text-blue-600',
+    red: 'text-red-600'
   };
 
   return (
@@ -825,19 +721,19 @@ function CenterStats({ center }) {
       <div className="flex flex-wrap items-center gap-4">
         <div className="flex items-center gap-2">
           <span className="font-semibold">Branches:</span>
-          <span className="text-brand-primary font-semibold">{branchCount}</span>
+          <span>{branchCount}</span>
         </div>
 
         <div className="flex items-center gap-3">
           <span className="font-semibold">Classes:</span>
-          <span>Crib <span className="text-brand-primary font-semibold">{classCounts.crib || 0}</span></span>
-          <span>Clicker <span className="text-brand-primary font-semibold">{classCounts.clicker || 0}</span></span>
-          <span>Quest <span className="text-brand-primary font-semibold">{classCounts.quest || 0}</span></span>
+          <span>Crib {classCounts.crib || 0}</span>
+          <span>Clicker {classCounts.clicker || 0}</span>
+          <span>Quest {classCounts.quest || 0}</span>
         </div>
 
         <div className="flex items-center gap-2">
           <span className="font-semibold">Lessons:</span>
-          <span><span className="text-brand-primary font-semibold">{completedLessons}</span>/<span className="text-brand-primary font-semibold">{totalLessons}</span> completed</span>
+          <span>{completedLessons}/{totalLessons} completed</span>
         </div>
 
         {upcoming && (
@@ -855,13 +751,10 @@ function CenterStats({ center }) {
 
 function ClassScheduleView({ center }) {
   const [expanded, setExpanded] = useState({});
-  const [expandedCourses, setExpandedCourses] = useState({});
   const classes = center.classes || [];
   const lessons = center.lessons || [];
-  const courses = center.courses || [];
 
   const toggle = (id) => setExpanded(prev => ({ ...prev, [id]: !prev[id] }));
-  const toggleCourse = (id) => setExpandedCourses(prev => ({ ...prev, [id]: !prev[id] }));
 
   const formatDate = (iso) => {
     try { return iso ? new Date(iso).toLocaleString() : ''; } catch (e) { return iso; }
@@ -896,9 +789,7 @@ function ClassScheduleView({ center }) {
                     <div className="text-sm font-semibold text-gray-900">{cls.name}</div>
                     <div className="text-xs text-gray-500 px-2 py-0.5 bg-white border rounded">{cls.type}</div>
                   </div>
-
-      {/* Courses & Schedule moved below Weekly Breakdown and Student Metrics (stray recursion removed) */}
-                      <div className="text-sm text-gray-600 mt-1"><span className="text-brand-primary font-semibold">{completed}</span>/<span className="text-brand-primary font-semibold">{total}</span> lessons completed</div>
+                  <div className="text-sm text-gray-600 mt-1">{completed}/{total} lessons completed</div>
                   {upcoming && (
                     <div className="text-xs text-gray-500 mt-1">Next: {upcoming.title} — {formatDate(upcoming.scheduledAt)}</div>
                   )}
@@ -907,13 +798,13 @@ function ClassScheduleView({ center }) {
                 <div className="flex items-center gap-3">
                   <div className="w-36 bg-gray-200 rounded-full h-2 overflow-hidden">
                     <div
-                      className="bg-brand-primary h-2 rounded-full"
+                      className="bg-green-500 h-2 rounded-full"
                       style={{ width: total === 0 ? '0%' : `${Math.round((completed/total)*100)}%` }}
                     />
                   </div>
                   <button
                     onClick={() => toggle(cls.id)}
-                    className="text-sm text-brand-info hover:underline"
+                    className="text-sm text-blue-600 hover:underline"
                   >
                     {expanded[cls.id] ? 'Hide' : 'View lessons'}
                   </button>
@@ -929,7 +820,7 @@ function ClassScheduleView({ center }) {
                     {clsLessons.map((l) => (
                       <li key={l.id} className="flex items-center justify-between text-sm">
                         <div>
-                              <div className="font-medium text-gray-900">Lesson <span className="text-brand-primary">{l.number}</span>: {l.title}</div>
+                          <div className="font-medium text-gray-900">Lesson {l.number}: {l.title}</div>
                           <div className="text-xs text-gray-500">{formatDate(l.scheduledAt)} — {l.completed ? 'Completed' : 'Pending'}</div>
                         </div>
                         <div className="text-xs text-gray-600">{l.completed ? '✅' : '⏳'}</div>
@@ -941,82 +832,6 @@ function ClassScheduleView({ center }) {
             </div>
           );
         })}
-
-        {/* Courses grouped by level */}
-        <div className="mt-4">
-          <h4 className="text-md font-semibold text-gray-900 mb-2">Courses (by Level)</h4>
-          <div className="space-y-3">
-            {['crib','clicker','quest'].map((level) => {
-              const levelCourses = courses.filter(c => c.type === level);
-              if (levelCourses.length === 0) return null;
-
-              return (
-                <div key={level} className="bg-gray-50 p-3 rounded-md border border-gray-100">
-                    <div className="flex items-center justify-between mb-2">
-                    <div className="font-semibold text-gray-900">{level.charAt(0).toUpperCase() + level.slice(1)}</div>
-                    <div className="text-sm text-gray-600"><span className="text-brand-primary font-semibold">{levelCourses.length}</span> course(s)</div>
-                  </div>
-
-                  <div className="space-y-2">
-                    {levelCourses.map((course) => {
-                      const sessions = course.sessions || [];
-                      const totalS = sessions.length;
-                      const completedS = sessions.filter(s => s.completed).length;
-
-                      return (
-                        <div key={course.id} className="bg-white rounded-md p-3 border border-gray-100">
-                          <div className="flex items-start justify-between gap-4">
-                            <div className="flex-1">
-                                <div className="flex items-center gap-2">
-                                <div className="font-medium text-gray-900">{course.title}</div>
-                                <div className="text-xs text-gray-500"><span className="text-brand-primary font-medium">{course.students}</span> students</div>
-                              </div>
-                              <div className="text-sm text-gray-600 mt-1">Sessions: <span className="text-brand-primary font-semibold">{completedS}</span>/<span className="text-brand-primary font-semibold">{totalS}</span> completed</div>
-                            </div>
-
-                            <div className="flex items-center gap-3">
-                              <div className="w-40 bg-gray-200 rounded-full h-2 overflow-hidden">
-                                <div
-                                  className="bg-brand-primary h-2 rounded-full"
-                                  style={{ width: totalS === 0 ? '0%' : `${Math.round((completedS/totalS)*100)}%` }}
-                                />
-                              </div>
-                              <button
-                                onClick={() => toggleCourse(course.id)}
-                                className="text-sm text-brand-info hover:underline"
-                              >
-                                {expandedCourses[course.id] ? 'Hide' : 'View sessions'}
-                              </button>
-                            </div>
-                          </div>
-
-                          {expandedCourses[course.id] && (
-                            <div className="mt-3 border-t border-gray-100 pt-3">
-                              <ul className="space-y-2">
-                                {sessions.length === 0 && (
-                                  <li className="text-sm text-gray-600">No sessions for this course.</li>
-                                )}
-                                {sessions.map((s) => (
-                                  <li key={s.id} className="flex items-center justify-between text-sm">
-                                    <div>
-                                      <div className="font-medium text-gray-900">Session <span className="text-brand-primary">{s.number}</span>: {s.title}</div>
-                                      <div className="text-xs text-gray-500">{formatDate(s.scheduledAt)} — {s.completed ? 'Completed' : 'Pending'}</div>
-                                    </div>
-                                    <div className="text-xs text-gray-600">{s.completed ? '✅' : '⏳'}</div>
-                                  </li>
-                                ))}
-                              </ul>
-                            </div>
-                          )}
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
       </div>
     </div>
   );

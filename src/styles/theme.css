@@ -119,38 +119,6 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
-/* Brand colors for project */
-:root {
-  --brand-primary: #25476a; /* dark navy */
-  --brand-accent: #feb139;  /* orange */
-  --brand-info: #38aae1;    /* light blue */
-}
-
-@layer components {
-  .text-brand-primary { color: var(--brand-primary); }
-  .text-brand-accent { color: var(--brand-accent); }
-  .text-brand-info { color: var(--brand-info); }
-
-  .bg-brand-primary { background-color: var(--brand-primary); color: #fff; }
-  .bg-brand-accent { background-color: var(--brand-accent); color: #000; }
-  .bg-brand-info { background-color: var(--brand-info); color: #000; }
-
-  .bg-brand-primary-50 { background-color: rgba(37,71,106,0.08); }
-  .bg-brand-accent-50 { background-color: rgba(254,177,57,0.08); }
-  .bg-brand-info-50 { background-color: rgba(56,170,225,0.08); }
-
-  .badge-dot-info { background-color: var(--brand-info); }
-
-  /* Progress bar fills (use with rounded h-2 containers) */
-  .progress-submitted { background-color: var(--brand-info); }
-  .progress-retries { background-color: var(--brand-accent); }
-  .progress-graded { background-color: var(--brand-primary); }
-
-  /* group hover helper since Tailwind group-hover utility won't target custom classes here */
-  .group-hover-brand-primary { transition: color .15s ease; }
-  .group:hover .group-hover-brand-primary { color: var(--brand-primary); }
-}
-
 @layer base {
   * {
     @apply border-border outline-ring/50;

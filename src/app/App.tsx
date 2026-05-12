@@ -45,7 +45,56 @@ const mockData = {
         { week: 'Week 4', submitted: 310, retries: 69, issued: 429, graded: 292 }
       ],
       studentMetrics: { completionRate: 87.5, passRate: 78.2, dropRate: 4.8 },
-      qaVisits: { total: 24, weeklyScheduled: 2, surprise: 8, announced: 16 }
+      qaVisits: { 
+        total: 24, 
+        weeklyScheduled: 2, 
+        surprise: 8, 
+        announced: 16,
+        weeklyVisits: [
+          {
+            id: 1,
+            date: '2026-05-08',
+            type: 'scheduled',
+            technicalMentor: 'John Kamau',
+            visitedMentor: 'Mary Wanjiku',
+            school: 'Nairobi Branch A',
+            status: 'completed',
+            rating: 4.5
+          },
+          {
+            id: 2,
+            date: '2026-05-10',
+            type: 'surprise',
+            technicalMentor: 'Sarah Ochieng',
+            visitedMentor: 'James Muriithi',
+            school: 'Nairobi Branch B',
+            status: 'completed',
+            rating: 4.2
+          }
+        ],
+        recentVisits: [
+          {
+            id: 3,
+            date: '2026-05-05',
+            type: 'announced',
+            technicalMentor: 'David Njoroge',
+            visitedMentor: 'Grace Kiplagat',
+            school: 'Nairobi Branch C',
+            status: 'completed',
+            rating: 4.8
+          },
+          {
+            id: 4,
+            date: '2026-05-03',
+            type: 'scheduled',
+            technicalMentor: 'John Kamau',
+            visitedMentor: 'Peter Kimani',
+            school: 'Nairobi Branch A',
+            status: 'completed',
+            rating: 4.0
+          }
+        ]
+      }
     },
     {
       id: 2,
@@ -82,7 +131,46 @@ const mockData = {
         { week: 'Week 4', submitted: 240, retries: 50, issued: 320, graded: 210 }
       ],
       studentMetrics: { completionRate: 82.3, passRate: 74.5, dropRate: 6.2 },
-      qaVisits: { total: 18, weeklyScheduled: 2, surprise: 6, announced: 12 }
+      qaVisits: { 
+        total: 18, 
+        weeklyScheduled: 2, 
+        surprise: 6, 
+        announced: 12,
+        weeklyVisits: [
+          {
+            id: 5,
+            date: '2026-05-09',
+            type: 'scheduled',
+            technicalMentor: 'Michael Ali',
+            visitedMentor: 'Fatuma Hassan',
+            school: 'Mombasa Branch A',
+            status: 'completed',
+            rating: 4.3
+          },
+          {
+            id: 6,
+            date: '2026-05-11',
+            type: 'surprise',
+            technicalMentor: 'Aisha Patel',
+            visitedMentor: 'Hassan Omar',
+            school: 'Mombasa Branch B',
+            status: 'completed',
+            rating: 4.6
+          }
+        ],
+        recentVisits: [
+          {
+            id: 7,
+            date: '2026-05-06',
+            type: 'announced',
+            technicalMentor: 'Michael Ali',
+            visitedMentor: 'Mariam Said',
+            school: 'Mombasa Branch A',
+            status: 'completed',
+            rating: 4.1
+          }
+        ]
+      }
     },
     {
       id: 3,
@@ -117,7 +205,36 @@ const mockData = {
         { week: 'Week 4', submitted: 193, retries: 37, issued: 258, graded: 168 }
       ],
       studentMetrics: { completionRate: 79.8, passRate: 71.3, dropRate: 7.5 },
-      qaVisits: { total: 15, weeklyScheduled: 1, surprise: 5, announced: 10 }
+      qaVisits: { 
+        total: 15, 
+        weeklyScheduled: 1, 
+        surprise: 5, 
+        announced: 10,
+        weeklyVisits: [
+          {
+            id: 8,
+            date: '2026-05-07',
+            type: 'scheduled',
+            technicalMentor: 'Samuel Ochieng',
+            visitedMentor: 'Grace Akinyi',
+            school: 'Kisumu Branch A',
+            status: 'completed',
+            rating: 4.4
+          }
+        ],
+        recentVisits: [
+          {
+            id: 9,
+            date: '2026-05-04',
+            type: 'surprise',
+            technicalMentor: 'Lucy Wanjiru',
+            visitedMentor: 'David Ochieng',
+            school: 'Kisumu Branch A',
+            status: 'completed',
+            rating: 4.7
+          }
+        ]
+      }
     },
     {
       id: 4,
@@ -152,7 +269,36 @@ const mockData = {
         { week: 'Week 4', submitted: 159, retries: 31, issued: 210, graded: 137 }
       ],
       studentMetrics: { completionRate: 85.2, passRate: 76.8, dropRate: 5.1 },
-      qaVisits: { total: 12, weeklyScheduled: 1, surprise: 4, announced: 8 }
+      qaVisits: { 
+        total: 12, 
+        weeklyScheduled: 1, 
+        surprise: 4, 
+        announced: 8,
+        weeklyVisits: [
+          {
+            id: 10,
+            date: '2026-05-06',
+            type: 'scheduled',
+            technicalMentor: 'Joseph Kiprop',
+            visitedMentor: 'Emily Chebet',
+            school: 'Eldoret Branch A',
+            status: 'completed',
+            rating: 4.6
+          }
+        ],
+        recentVisits: [
+          {
+            id: 11,
+            date: '2026-05-02',
+            type: 'announced',
+            technicalMentor: 'Rebecca Tanui',
+            visitedMentor: 'Samuel Kiplagat',
+            school: 'Eldoret Branch B',
+            status: 'completed',
+            rating: 4.3
+          }
+        ]
+      }
     }
   ]
 };
@@ -194,19 +340,21 @@ export default function App() {
   const handleCenterSelect = (center) => {
     setSelectedCenter(center);
     setDropdownOpen(false);
+    window.scrollTo(0, 0);
   };
 
   const handleBackToOverview = () => {
     setSelectedCenter(null);
+    setDropdownOpen(false);
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 p-8">
+    <div className="min-h-screen bg-[#f4f8fb] p-4 md:p-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Digifunzi Centers Dashboard</h1>
-          <p className="text-gray-600">Overview and insights across all learning centers</p>
+          <h1 className="text-3xl font-bold text-[#25476a] mb-2">Digifunzi Centers Dashboard</h1>
+          <p className="text-[#5d7690]">Overview and insights across all learning centers</p>
         </div>
 
         {/* Content Area */}
@@ -221,32 +369,35 @@ export default function App() {
           />
         ) : (
           <>
-            {/* Center Selector */}
-            <div className="mb-6">
+            {/* Center Header with Back Button */}
+            <div className="mb-6 flex items-center gap-4">
+              <button
+                onClick={handleBackToOverview}
+                className="bg-white border border-[#d9e7f2] rounded-lg px-4 py-2 flex items-center gap-2 hover:bg-[#e9f6fc] transition-colors"
+              >
+                <ChevronDown className="w-4 h-4 text-[#38aae1] rotate-90" />
+                <span className="text-[#25476a]">Back to Overview</span>
+              </button>
+              
+              {/* Center Selector */}
               <div className="relative inline-block">
                 <button
                   onClick={() => setDropdownOpen(!dropdownOpen)}
-                  className="bg-white border border-gray-300 rounded-lg px-4 py-2 flex items-center gap-2 hover:bg-gray-50 transition-colors min-w-64"
+                  className="bg-white border border-[#d9e7f2] rounded-lg px-4 py-2 flex items-center gap-2 hover:bg-[#e9f6fc] transition-colors min-w-64"
                 >
-                  <span className="text-gray-700">
+                  <span className="text-[#25476a]">
                     {selectedCenter.name}
                   </span>
-                  <ChevronDown className="w-4 h-4 text-gray-500" />
+                  <ChevronDown className="w-4 h-4 text-[#38aae1]" />
                 </button>
 
                 {dropdownOpen && (
-                  <div className="absolute top-full mt-2 bg-white border border-gray-200 rounded-lg shadow-lg z-10 min-w-64">
-                    <button
-                      onClick={handleBackToOverview}
-                      className="w-full text-left px-4 py-2 hover:bg-gray-50 border-b border-gray-100"
-                    >
-                      All Centers Overview
-                    </button>
+                  <div className="absolute top-full mt-2 bg-white border border-[#d9e7f2] rounded-lg shadow-lg z-10 min-w-64">
                     {mockData.centers.map((center) => (
                       <button
                         key={center.id}
                         onClick={() => handleCenterSelect(center)}
-                        className="w-full text-left px-4 py-2 hover:bg-gray-50"
+                        className="w-full text-left px-4 py-2 hover:bg-[#e9f6fc] text-[#25476a]"
                       >
                         {center.name}
                       </button>
@@ -275,30 +426,30 @@ function OverviewView({ centers, totals, dropdownOpen, setDropdownOpen, handleCe
   return (
     <div className="space-y-6">
       {/* All Users Overview */}
-      <div className="bg-white rounded-lg border border-gray-200">
-        <div className="p-6 border-b border-gray-200">
+      <div className="bg-white rounded-lg border border-[#d9e7f2]">
+        <div className="p-6 border-b border-[#d9e7f2]">
           <div className="flex items-center gap-2">
-            <Users className="w-5 h-5 text-gray-700" />
-            <h2 className="text-xl font-semibold text-gray-900">All Users Overview</h2>
+            <Users className="w-5 h-5 text-[#38aae1]" />
+            <h2 className="text-xl font-semibold text-[#25476a]">All Users Overview</h2>
           </div>
         </div>
         <div className="p-6">
-          <div className="grid grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             <div className="text-center">
-              <div className="text-sm text-gray-600 mb-2">Total Users</div>
-              <div className="text-4xl font-bold text-gray-900">{allUsers.total}</div>
+              <div className="text-sm text-[#5d7690] mb-2">Total Users</div>
+              <div className="text-4xl font-bold text-[#25476a]">{allUsers.total}</div>
             </div>
             <div className="text-center">
-              <div className="text-sm text-gray-600 mb-2">Active (90 days)</div>
-              <div className="text-4xl font-bold text-green-600">{allUsers.active}</div>
+              <div className="text-sm text-[#5d7690] mb-2">Active (90 days)</div>
+              <div className="text-4xl font-bold text-[#38aae1]">{allUsers.active}</div>
             </div>
             <div className="text-center">
-              <div className="text-sm text-gray-600 mb-2">Inactive (90 days)</div>
-              <div className="text-4xl font-bold text-red-600">{allUsers.inactive}</div>
+              <div className="text-sm text-[#5d7690] mb-2">Inactive (90 days)</div>
+              <div className="text-4xl font-bold text-[#feb139]">{allUsers.inactive}</div>
             </div>
             <div className="text-center">
-              <div className="text-sm text-gray-600 mb-2">Online (today)</div>
-              <div className="text-4xl font-bold text-blue-600">{allUsers.online}</div>
+              <div className="text-sm text-[#5d7690] mb-2">Online (today)</div>
+              <div className="text-4xl font-bold text-[#25476a]">{allUsers.online}</div>
             </div>
           </div>
         </div>
@@ -308,19 +459,19 @@ function OverviewView({ centers, totals, dropdownOpen, setDropdownOpen, handleCe
       <div className="relative inline-block">
         <button
           onClick={() => setDropdownOpen(!dropdownOpen)}
-          className="bg-white border border-gray-300 rounded-lg px-4 py-2 flex items-center gap-2 hover:bg-gray-50 transition-colors min-w-64"
+          className="bg-white border border-[#d9e7f2] rounded-lg px-4 py-2 flex items-center gap-2 hover:bg-[#e9f6fc] transition-colors min-w-64"
         >
-          <span className="text-gray-700">
+          <span className="text-[#25476a]">
             All Centers Overview
           </span>
-          <ChevronDown className="w-4 h-4 text-gray-500" />
+          <ChevronDown className="w-4 h-4 text-[#38aae1]" />
         </button>
 
         {dropdownOpen && (
-          <div className="absolute top-full mt-2 bg-white border border-gray-200 rounded-lg shadow-lg z-10 min-w-64">
+          <div className="absolute top-full mt-2 bg-white border border-[#d9e7f2] rounded-lg shadow-lg z-10 min-w-64">
             <button
               onClick={handleBackToOverview}
-              className="w-full text-left px-4 py-2 hover:bg-gray-50 border-b border-gray-100"
+              className="w-full text-left px-4 py-2 hover:bg-[#e9f6fc] border-b border-[#d9e7f2] text-[#25476a]"
             >
               All Centers Overview
             </button>
@@ -328,7 +479,7 @@ function OverviewView({ centers, totals, dropdownOpen, setDropdownOpen, handleCe
               <button
                 key={center.id}
                 onClick={() => handleCenterSelect(center)}
-                className="w-full text-left px-4 py-2 hover:bg-gray-50"
+                className="w-full text-left px-4 py-2 hover:bg-[#e9f6fc] text-[#25476a]"
               >
                 {center.name}
               </button>
@@ -338,7 +489,7 @@ function OverviewView({ centers, totals, dropdownOpen, setDropdownOpen, handleCe
       </div>
 
       {/* Role Statistics - Overview */}
-      <div className="grid grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <RoleStatsCard
           title="Teachers"
           icon={<GraduationCap className="w-5 h-5" />}
@@ -366,76 +517,72 @@ function OverviewView({ centers, totals, dropdownOpen, setDropdownOpen, handleCe
       </div>
 
       {/* Centers Table */}
-      <div className="bg-white rounded-lg border border-gray-200">
-        <div className="p-6 border-b border-gray-200">
-          <h2 className="text-xl font-semibold text-gray-900">Centers Overview</h2>
+      <div className="bg-white rounded-lg border border-[#d9e7f2]">
+        <div className="p-6 border-b border-[#d9e7f2]">
+          <h2 className="text-xl font-semibold text-[#25476a]">Centers Overview</h2>
         </div>
         <div className="p-6">
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {centers.map((center) => (
               <button
                 key={center.id}
                 onClick={() => handleCenterSelect(center)}
-                className="bg-white border-2 border-gray-200 rounded-lg p-6 hover:border-blue-500 hover:shadow-md transition-all text-left group"
+                className="bg-white border-2 border-[#d9e7f2] rounded-lg p-6 hover:border-[#38aae1] hover:shadow-md transition-all text-left group"
               >
                 <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-lg font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">
+                  <h3 className="text-lg font-semibold text-[#25476a] group-hover:text-[#38aae1] transition-colors">
                     {center.name}
                   </h3>
                   <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                    <span className="text-sm text-gray-600">Active</span>
+                    <div className="w-2 h-2 bg-[#38aae1] rounded-full"></div>
+                    <span className="text-sm text-[#5d7690]">Active</span>
                   </div>
                 </div>
 
                 <div className="grid grid-cols-4 gap-4 mb-4">
                   <div className="text-center">
-                    <div className="text-xs text-gray-600 mb-1">Teachers</div>
-                    <div className="text-lg font-bold text-gray-900">{center.teachers.total}</div>
+                    <div className="text-xs text-[#5d7690] mb-1">Teachers</div>
+                    <div className="text-lg font-bold text-[#25476a]">{center.teachers.total}</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-xs text-gray-600 mb-1">Learners</div>
-                    <div className="text-lg font-bold text-gray-900">{center.learners.total}</div>
+                    <div className="text-xs text-[#5d7690] mb-1">Learners</div>
+                    <div className="text-lg font-bold text-[#25476a]">{center.learners.total}</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-xs text-gray-600 mb-1">Parents</div>
-                    <div className="text-lg font-bold text-gray-900">{center.parents.total}</div>
+                    <div className="text-xs text-[#5d7690] mb-1">Parents</div>
+                    <div className="text-lg font-bold text-[#25476a]">{center.parents.total}</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-xs text-gray-600 mb-1">Mentors</div>
-                    <div className="text-lg font-bold text-gray-900">{center.technicalMentors.total}</div>
+                    <div className="text-xs text-[#5d7690] mb-1">Mentors</div>
+                    <div className="text-lg font-bold text-[#25476a]">{center.technicalMentors.total}</div>
                   </div>
-                </div>
-
-                <div className="mb-4">
-                  <CenterStats center={center} />
                 </div>
 
                 <div className="space-y-2">
                   <div className="flex items-center justify-between text-sm">
-                    <span className="text-gray-600">Completion Rate</span>
-                    <span className="font-semibold text-gray-900">{center.studentMetrics.completionRate}%</span>
+                    <span className="text-[#5d7690]">Completion Rate</span>
+                    <span className="font-semibold text-[#25476a]">{center.studentMetrics.completionRate}%</span>
                   </div>
-                  <div className="w-full bg-gray-200 rounded-full h-2">
+                  <div className="w-full bg-[#d9e7f2] rounded-full h-2">
                     <div 
-                      className="bg-green-500 h-2 rounded-full transition-all"
+                      className="bg-[#38aae1] h-2 rounded-full transition-all"
                       style={{ width: `${center.studentMetrics.completionRate}%` }}
                     ></div>
                   </div>
                 </div>
 
-                <div className="mt-4 pt-4 border-t border-gray-200 flex items-center justify-between">
+                <div className="mt-4 pt-4 border-t border-[#d9e7f2] flex items-center justify-between">
                   <div className="flex items-center gap-4 text-sm">
                     <div>
-                      <span className="text-gray-600">Pass Rate: </span>
-                      <span className="font-semibold text-blue-600">{center.studentMetrics.passRate}%</span>
+                      <span className="text-[#5d7690]">Pass Rate: </span>
+                      <span className="font-semibold text-[#38aae1]">{center.studentMetrics.passRate}%</span>
                     </div>
                     <div>
-                      <span className="text-gray-600">Drop Rate: </span>
-                      <span className="font-semibold text-red-600">{center.studentMetrics.dropRate}%</span>
+                      <span className="text-[#5d7690]">Drop Rate: </span>
+                      <span className="font-semibold text-[#feb139]">{center.studentMetrics.dropRate}%</span>
                     </div>
                   </div>
-                  <ChevronDown className="w-5 h-5 text-gray-400 group-hover:text-blue-600 transition-colors rotate-[-90deg]" />
+                  <ChevronDown className="w-5 h-5 text-[#8db3ce] group-hover:text-[#38aae1] transition-colors rotate-[-90deg]" />
                 </div>
               </button>
             ))}
@@ -449,14 +596,8 @@ function OverviewView({ centers, totals, dropdownOpen, setDropdownOpen, handleCe
 function CenterDetailView({ center }) {
   return (
     <div className="space-y-6">
-      <div>
-        <CenterStats center={center} />
-      </div>
-      <div>
-        <ClassScheduleView center={center} />
-      </div>
       {/* Role Statistics */}
-      <div className="grid grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <RoleStatsCard
           title="Teachers"
           icon={<GraduationCap className="w-5 h-5" />}
@@ -484,18 +625,18 @@ function CenterDetailView({ center }) {
       </div>
 
       {/* Assignments Section */}
-      <div className="bg-white rounded-lg border border-gray-200">
-        <div className="p-6 border-b border-gray-200">
+      <div className="bg-white rounded-lg border border-[#d9e7f2]">
+        <div className="p-6 border-b border-[#d9e7f2]">
           <div className="flex items-center gap-2">
-            <FileText className="w-5 h-5 text-gray-700" />
-            <h2 className="text-xl font-semibold text-gray-900">Assignments</h2>
+            <FileText className="w-5 h-5 text-[#38aae1]" />
+            <h2 className="text-xl font-semibold text-[#25476a]">Assignments</h2>
           </div>
         </div>
         <div className="p-6">
           {/* Overall Assignments */}
           <div className="mb-6">
-            <h3 className="text-sm font-medium text-gray-700 mb-3">Overall Statistics</h3>
-            <div className="grid grid-cols-4 gap-4">
+            <h3 className="text-sm font-medium text-[#25476a] mb-3">Overall Statistics</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               <StatBox label="Issued" value={center.assignments.issued} />
               <StatBox label="Submitted" value={center.assignments.submitted} />
               <StatBox
@@ -513,50 +654,132 @@ function CenterDetailView({ center }) {
 
           {/* Weekly Assignments */}
           <div>
-            <h3 className="text-sm font-medium text-gray-700 mb-3">Weekly Breakdown</h3>
-            <div className="overflow-x-auto">
-              <table className="w-full">
-                <thead className="bg-gray-50 border-b border-gray-200">
-                  <tr>
-                    <th className="text-left px-4 py-2 text-sm font-medium text-gray-700">Week</th>
-                    <th className="text-right px-4 py-2 text-sm font-medium text-gray-700">Issued</th>
-                    <th className="text-right px-4 py-2 text-sm font-medium text-gray-700">Submitted</th>
-                    <th className="text-right px-4 py-2 text-sm font-medium text-gray-700">Retries</th>
-                    <th className="text-right px-4 py-2 text-sm font-medium text-gray-700">Retry %</th>
-                    <th className="text-right px-4 py-2 text-sm font-medium text-gray-700">Graded</th>
-                    <th className="text-right px-4 py-2 text-sm font-medium text-gray-700">Graded %</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-gray-200">
-                  {center.weeklyAssignments.map((week, index) => (
-                    <tr key={index}>
-                      <td className="px-4 py-3 text-sm text-gray-900">{week.week}</td>
-                      <td className="px-4 py-3 text-sm text-right text-gray-700">{week.issued}</td>
-                      <td className="px-4 py-3 text-sm text-right text-gray-700">{week.submitted}</td>
-                      <td className="px-4 py-3 text-sm text-right text-gray-700">{week.retries}</td>
-                      <td className="px-4 py-3 text-sm text-right text-gray-700">
-                        {(week.retries / week.submitted * 100).toFixed(1)}%
-                      </td>
-                      <td className="px-4 py-3 text-sm text-right text-gray-700">{week.graded}</td>
-                      <td className="px-4 py-3 text-sm text-right text-gray-700">
-                        {(week.graded / week.issued * 100).toFixed(1)}%
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+            <h3 className="text-sm font-medium text-[#25476a] mb-3">Weekly Breakdown</h3>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {/* Latest Week Summary */}
+              <div className="bg-[#f4f8fb] rounded-lg border border-[#d9e7f2] p-4">
+                <div className="flex items-center justify-between mb-4">
+                  <h4 className="text-lg font-semibold text-[#25476a]">
+                    {center.weeklyAssignments[center.weeklyAssignments.length - 1]?.week || 'Current Week'}
+                  </h4>
+                  <div className="text-xs text-[#38aae1] bg-white px-2 py-1 rounded border border-[#d9e7f2]">
+                    Latest Week
+                  </div>
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <div className="text-sm text-[#5d7690] mb-1">Assignments Issued</div>
+                    <div className="text-2xl font-bold text-[#25476a]">
+                      {center.weeklyAssignments[center.weeklyAssignments.length - 1]?.issued || 0}
+                    </div>
+                  </div>
+                  <div>
+                    <div className="text-sm text-[#5d7690] mb-1">Assignments Graded</div>
+                    <div className="text-2xl font-bold text-[#38aae1]">
+                      {center.weeklyAssignments[center.weeklyAssignments.length - 1]?.graded || 0}
+                    </div>
+                  </div>
+                  <div>
+                    <div className="text-sm text-[#5d7690] mb-1">Submissions</div>
+                    <div className="text-2xl font-bold text-[#25476a]">
+                      {center.weeklyAssignments[center.weeklyAssignments.length - 1]?.submitted || 0}
+                    </div>
+                  </div>
+                  <div>
+                    <div className="text-sm text-[#5d7690] mb-1">Completion Rate</div>
+                    <div className="text-2xl font-bold text-[#38aae1]">
+                      {center.weeklyAssignments[center.weeklyAssignments.length - 1] ? 
+                        ((center.weeklyAssignments[center.weeklyAssignments.length - 1].graded / 
+                          center.weeklyAssignments[center.weeklyAssignments.length - 1].issued) * 100).toFixed(1) : 0}%
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Weekly Activity Summary */}
+              <div className="bg-white rounded-lg border border-[#d9e7f2] p-4">
+                <h4 className="text-lg font-semibold text-[#25476a] mb-4">This Week's Activity</h4>
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between p-3 bg-[#e9f6fc] rounded-lg">
+                    <div className="flex items-center gap-3">
+                      <div className="w-2 h-2 bg-[#38aae1] rounded-full"></div>
+                      <span className="text-sm text-[#25476a]">Assignments Issued</span>
+                    </div>
+                    <span className="text-sm font-semibold text-[#25476a]">
+                      {center.weeklyAssignments[center.weeklyAssignments.length - 1]?.issued || 0} new tasks
+                    </span>
+                  </div>
+                  <div className="flex items-center justify-between p-3 bg-[#f0f9ff] rounded-lg">
+                    <div className="flex items-center gap-3">
+                      <div className="w-2 h-2 bg-[#25476a] rounded-full"></div>
+                      <span className="text-sm text-[#25476a]">Student Submissions</span>
+                    </div>
+                    <span className="text-sm font-semibold text-[#25476a]">
+                      {center.weeklyAssignments[center.weeklyAssignments.length - 1]?.submitted || 0} submissions
+                    </span>
+                  </div>
+                  <div className="flex items-center justify-between p-3 bg-[#fff3d9] rounded-lg">
+                    <div className="flex items-center gap-3">
+                      <div className="w-2 h-2 bg-[#feb139] rounded-full"></div>
+                      <span className="text-sm text-[#25476a]">Retry Requests</span>
+                    </div>
+                    <span className="text-sm font-semibold text-[#feb139]">
+                      {center.weeklyAssignments[center.weeklyAssignments.length - 1]?.retries || 0} retries
+                    </span>
+                  </div>
+                  <div className="flex items-center justify-between p-3 bg-[#e9f6fc] rounded-lg">
+                    <div className="flex items-center gap-3">
+                      <div className="w-2 h-2 bg-[#38aae1] rounded-full"></div>
+                      <span className="text-sm text-[#25476a]">Sessions Completed</span>
+                    </div>
+                    <span className="text-sm font-semibold text-[#38aae1]">
+                      {Math.floor((center.weeklyAssignments[center.weeklyAssignments.length - 1]?.graded || 0) / 3) || 0} of {Math.ceil((center.weeklyAssignments[center.weeklyAssignments.length - 1]?.issued || 0) / 3) || 0} sessions
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Historical Weeks */}
+            <div className="mt-6">
+              <h4 className="text-sm font-medium text-[#25476a] mb-3">Previous Weeks</h4>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {center.weeklyAssignments.slice(0, -1).reverse().slice(0, 3).map((week, index) => {
+                  const completionPercentage = ((week.graded / week.issued) * 100).toFixed(1);
+                  return (
+                    <div key={index} className="bg-white border border-[#d9e7f2] rounded-lg p-4">
+                      <div className="flex items-center justify-between mb-3">
+                        <h5 className="text-sm font-semibold text-[#25476a]">{week.week}</h5>
+                        <span className="text-lg font-bold text-[#38aae1]">{completionPercentage}%</span>
+                      </div>
+                      <div className="space-y-2">
+                        <div className="w-full bg-[#d9e7f2] rounded-full h-2 overflow-hidden">
+                          <div
+                            className="bg-[#38aae1] h-2 rounded-full transition-all"
+                            style={{ width: `${completionPercentage}%` }}
+                          />
+                        </div>
+                        <div className="flex justify-between text-xs text-[#5d7690]">
+                          <span>{week.graded} graded</span>
+                          <span>of {week.issued} issued</span>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </div>
       </div>
 
       {/* Student Metrics */}
-      <div className="bg-white rounded-lg border border-gray-200">
-        <div className="p-6 border-b border-gray-200">
-          <h2 className="text-xl font-semibold text-gray-900">Student Performance Metrics</h2>
+      <div className="bg-white rounded-lg border border-[#d9e7f2]">
+        <div className="p-6 border-b border-[#d9e7f2]">
+          <h2 className="text-xl font-semibold text-[#25476a]">Student Performance Metrics</h2>
         </div>
         <div className="p-6">
-          <div className="grid grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             <MetricCard
               label="Completion Rate"
               value={center.studentMetrics.completionRate}
@@ -580,19 +803,104 @@ function CenterDetailView({ center }) {
       </div>
 
       {/* QA Visits */}
-      <div className="bg-white rounded-lg border border-gray-200">
-        <div className="p-6 border-b border-gray-200">
+      <div className="bg-white rounded-lg border border-[#d9e7f2]">
+        <div className="p-6 border-b border-[#d9e7f2]">
           <div className="flex items-center gap-2">
-            <ClipboardList className="w-5 h-5 text-gray-700" />
-            <h2 className="text-xl font-semibold text-gray-900">QA Visits</h2>
+            <ClipboardList className="w-5 h-5 text-[#38aae1]" />
+            <h2 className="text-xl font-semibold text-[#25476a]">QA Visits</h2>
           </div>
         </div>
         <div className="p-6">
-          <div className="grid grid-cols-4 gap-4">
-            <StatBox label="Total Visits" value={center.qaVisits.total} />
-            <StatBox label="Weekly Scheduled" value={center.qaVisits.weeklyScheduled} />
-            <StatBox label="Surprise Visits" value={center.qaVisits.surprise} />
-            <StatBox label="Announced Visits" value={center.qaVisits.announced} />
+          {/* Overall QA Stats */}
+          <div className="mb-6">
+            <h4 className="text-sm font-medium text-[#25476a] mb-3">Overall QA Statistics</h4>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              <StatBox label="Total Visits" value={center.qaVisits.total} />
+              <StatBox label="Weekly Scheduled" value={center.qaVisits.weeklyScheduled} />
+              <StatBox label="Surprise Visits" value={center.qaVisits.surprise} />
+              <StatBox label="Announced Visits" value={center.qaVisits.announced} />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {/* Weekly QA Stats */}
+            <div className="bg-[#f4f8fb] rounded-lg border border-[#d9e7f2] p-4">
+              <div className="flex items-center justify-between mb-4">
+                <h4 className="text-lg font-semibold text-[#25476a]">This Week's QA Activity</h4>
+                <div className="text-xs text-[#38aae1] bg-white px-2 py-1 rounded border border-[#d9e7f2]">
+                  Last 7 Days
+                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <div className="text-sm text-[#5d7690] mb-1">Visits Completed</div>
+                  <div className="text-2xl font-bold text-[#25476a]">
+                    {center.qaVisits.weeklyVisits?.length || 0}
+                  </div>
+                </div>
+                <div>
+                  <div className="text-sm text-[#5d7690] mb-1">Average Rating</div>
+                  <div className="text-2xl font-bold text-[#38aae1]">
+                    {center.qaVisits.weeklyVisits?.length ? 
+                      (center.qaVisits.weeklyVisits.reduce((sum, visit) => sum + visit.rating, 0) / center.qaVisits.weeklyVisits.length).toFixed(1) : '0.0'}
+                  </div>
+                </div>
+                <div>
+                  <div className="text-sm text-[#5d7690] mb-1">Surprise Visits</div>
+                  <div className="text-2xl font-bold text-[#feb139]">
+                    {center.qaVisits.weeklyVisits?.filter(v => v.type === 'surprise').length || 0}
+                  </div>
+                </div>
+                <div>
+                  <div className="text-sm text-[#5d7690] mb-1">Scheduled Visits</div>
+                  <div className="text-2xl font-bold text-[#38aae1]">
+                    {center.qaVisits.weeklyVisits?.filter(v => v.type === 'scheduled').length || 0}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Recent QA Visits */}
+            <div className="bg-white rounded-lg border border-[#d9e7f2] p-4">
+              <h4 className="text-lg font-semibold text-[#25476a] mb-4">Recent QA Visits</h4>
+              <div className="space-y-3">
+                {(center.qaVisits.weeklyVisits || []).concat(center.qaVisits.recentVisits || []).slice(0, 2).map((visit) => (
+                  <div key={visit.id} className="border border-[#d9e7f2] rounded-lg p-3">
+                    <div className="flex items-center justify-between mb-2">
+                      <div className="flex items-center gap-2">
+                        <div className={`w-2 h-2 rounded-full ${
+                          visit.type === 'surprise' ? 'bg-[#feb139]' : 
+                          visit.type === 'scheduled' ? 'bg-[#38aae1]' : 'bg-[#25476a]'
+                        }`}></div>
+                        <span className="text-sm font-medium text-[#25476a] capitalize">{visit.type}</span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <span className="text-xs text-[#38aae1]">★</span>
+                        <span className="text-xs text-[#5d7690]">{visit.rating}</span>
+                      </div>
+                    </div>
+                    <div className="space-y-1">
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs text-[#5d7690]">Technical Mentor:</span>
+                        <span className="text-xs font-medium text-[#25476a]">{visit.technicalMentor}</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs text-[#5d7690]">Visited:</span>
+                        <span className="text-xs font-medium text-[#25476a]">{visit.visitedMentor}</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs text-[#5d7690]">School:</span>
+                        <span className="text-xs font-medium text-[#25476a]">{visit.school}</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs text-[#5d7690]">Date:</span>
+                        <span className="text-xs font-medium text-[#25476a]">{new Date(visit.date).toLocaleDateString()}</span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -602,58 +910,58 @@ function CenterDetailView({ center }) {
 
 function SummaryCard({ icon, label, value, color }) {
   const colors = {
-    blue: 'bg-blue-50 text-blue-600',
-    green: 'bg-green-50 text-green-600',
-    purple: 'bg-purple-50 text-purple-600',
-    orange: 'bg-orange-50 text-orange-600'
+    blue: 'bg-[#e9f6fc] text-[#38aae1]',
+    green: 'bg-[#e9f6fc] text-[#25476a]',
+    purple: 'bg-[#fff3d9] text-[#25476a]',
+    orange: 'bg-[#fff3d9] text-[#feb139]'
   };
 
   return (
-    <div className="bg-white rounded-lg border border-gray-200 p-6">
+    <div className="bg-white rounded-lg border border-[#d9e7f2] p-6">
       <div className={`w-12 h-12 rounded-lg ${colors[color]} flex items-center justify-center mb-3`}>
         {icon}
       </div>
-      <div className="text-2xl font-bold text-gray-900">{value}</div>
-      <div className="text-sm text-gray-600 mt-1">{label}</div>
+      <div className="text-2xl font-bold text-[#25476a]">{value}</div>
+      <div className="text-sm text-[#5d7690] mt-1">{label}</div>
     </div>
   );
 }
 
 function RoleStatsCard({ title, icon, stats, color }) {
   const colors = {
-    blue: 'bg-blue-50 text-blue-600',
-    green: 'bg-green-50 text-green-600',
-    purple: 'bg-purple-50 text-purple-600',
-    orange: 'bg-orange-50 text-orange-600'
+    blue: 'bg-[#e9f6fc] text-[#38aae1]',
+    green: 'bg-[#e9f6fc] text-[#25476a]',
+    purple: 'bg-[#fff3d9] text-[#25476a]',
+    orange: 'bg-[#fff3d9] text-[#feb139]'
   };
 
   return (
-    <div className="bg-white rounded-lg border border-gray-200">
-      <div className="p-6 border-b border-gray-200">
+    <div className="bg-white rounded-lg border border-[#d9e7f2]">
+      <div className="p-6 border-b border-[#d9e7f2]">
         <div className="flex items-center gap-2">
           <div className={`w-10 h-10 rounded-lg ${colors[color]} flex items-center justify-center`}>
             {icon}
           </div>
-          <h3 className="text-lg font-semibold text-gray-900">{title}</h3>
+          <h3 className="text-lg font-semibold text-[#25476a]">{title}</h3>
         </div>
       </div>
       <div className="p-6">
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <div className="text-sm text-gray-600 mb-1">Total</div>
-            <div className="text-2xl font-bold text-gray-900">{stats.total}</div>
+            <div className="text-sm text-[#5d7690] mb-1">Total</div>
+            <div className="text-2xl font-bold text-[#25476a]">{stats.total}</div>
           </div>
           <div>
-            <div className="text-sm text-gray-600 mb-1">Active (90 days)</div>
-            <div className="text-2xl font-bold text-gray-900">{stats.active}</div>
+            <div className="text-sm text-[#5d7690] mb-1">Active (90 days)</div>
+            <div className="text-2xl font-bold text-[#25476a]">{stats.active}</div>
           </div>
           <div>
-            <div className="text-sm text-gray-600 mb-1">Inactive (90 days)</div>
-            <div className="text-2xl font-bold text-gray-900">{stats.inactive}</div>
+            <div className="text-sm text-[#5d7690] mb-1">Inactive (90 days)</div>
+            <div className="text-2xl font-bold text-[#25476a]">{stats.inactive}</div>
           </div>
           <div>
-            <div className="text-sm text-gray-600 mb-1">Online (today)</div>
-            <div className="text-2xl font-bold text-gray-900">{stats.online}</div>
+            <div className="text-sm text-[#5d7690] mb-1">Online (today)</div>
+            <div className="text-2xl font-bold text-[#25476a]">{stats.online}</div>
           </div>
         </div>
       </div>
@@ -663,11 +971,11 @@ function RoleStatsCard({ title, icon, stats, color }) {
 
 function StatBox({ label, value, percentage }) {
   return (
-    <div className="bg-gray-50 rounded-lg p-4">
-      <div className="text-sm text-gray-600 mb-1">{label}</div>
-      <div className="text-xl font-bold text-gray-900">{value}</div>
+    <div className="bg-[#f4f8fb] rounded-lg p-4">
+      <div className="text-sm text-[#5d7690] mb-1">{label}</div>
+      <div className="text-xl font-bold text-[#25476a]">{value}</div>
       {percentage && (
-        <div className="text-sm text-gray-500 mt-1">{percentage}%</div>
+        <div className="text-sm text-[#38aae1] mt-1">{percentage}%</div>
       )}
     </div>
   );
@@ -675,14 +983,14 @@ function StatBox({ label, value, percentage }) {
 
 function MetricCard({ label, value, unit, color }) {
   const colors = {
-    green: 'text-green-600',
-    blue: 'text-blue-600',
-    red: 'text-red-600'
+    green: 'text-[#38aae1]',
+    blue: 'text-[#25476a]',
+    red: 'text-[#feb139]'
   };
 
   return (
     <div className="text-center">
-      <div className="text-sm text-gray-600 mb-2">{label}</div>
+      <div className="text-sm text-[#5d7690] mb-2">{label}</div>
       <div className={`text-4xl font-bold ${colors[color]}`}>
         {value}{unit}
       </div>
@@ -690,149 +998,3 @@ function MetricCard({ label, value, unit, color }) {
   );
 }
 
-function CenterStats({ center }) {
-  const branches = center.branches || [];
-  const branchCount = branches.length;
-
-  const classes = center.classes || [];
-  const classCounts = classes.reduce((acc, c) => {
-    acc[c.type] = (acc[c.type] || 0) + 1;
-    return acc;
-  }, {});
-
-  const lessons = center.lessons || [];
-  const totalLessons = lessons.length;
-  const completedLessons = lessons.filter(l => l.completed).length;
-
-  const upcoming = lessons
-    .filter(l => !l.completed)
-    .sort((a, b) => {
-      const at = a.scheduledAt ? new Date(a.scheduledAt).getTime() : Infinity;
-      const bt = b.scheduledAt ? new Date(b.scheduledAt).getTime() : Infinity;
-      return at - bt;
-    })[0] || null;
-
-  const formatDate = (iso) => {
-    try { return iso ? new Date(iso).toLocaleString() : ''; } catch (e) { return iso; }
-  };
-
-  return (
-    <div className="bg-gray-50 p-3 rounded-md border border-gray-100 text-sm text-gray-700">
-      <div className="flex flex-wrap items-center gap-4">
-        <div className="flex items-center gap-2">
-          <span className="font-semibold">Branches:</span>
-          <span>{branchCount}</span>
-        </div>
-
-        <div className="flex items-center gap-3">
-          <span className="font-semibold">Classes:</span>
-          <span>Crib {classCounts.crib || 0}</span>
-          <span>Clicker {classCounts.clicker || 0}</span>
-          <span>Quest {classCounts.quest || 0}</span>
-        </div>
-
-        <div className="flex items-center gap-2">
-          <span className="font-semibold">Lessons:</span>
-          <span>{completedLessons}/{totalLessons} completed</span>
-        </div>
-
-        {upcoming && (
-          <div className="ml-auto text-right">
-            <div className="text-xs text-gray-600">Next</div>
-            <div className="font-semibold text-gray-900">
-              {upcoming.title} <span className="text-gray-500">({formatDate(upcoming.scheduledAt)})</span>
-            </div>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
-
-function ClassScheduleView({ center }) {
-  const [expanded, setExpanded] = useState({});
-  const classes = center.classes || [];
-  const lessons = center.lessons || [];
-
-  const toggle = (id) => setExpanded(prev => ({ ...prev, [id]: !prev[id] }));
-
-  const formatDate = (iso) => {
-    try { return iso ? new Date(iso).toLocaleString() : ''; } catch (e) { return iso; }
-  };
-
-  return (
-    <div className="bg-white rounded-lg border border-gray-200 p-4">
-      <div className="flex items-center justify-between mb-4">
-        <h3 className="text-lg font-semibold text-gray-900">Classes & Schedule</h3>
-      </div>
-
-      <div className="space-y-3">
-        {classes.length === 0 && (
-          <div className="text-sm text-gray-600">No classes found for this center.</div>
-        )}
-
-        {classes.map((cls) => {
-          const clsLessons = lessons.filter(l => l.classId === cls.id) || [];
-          const total = clsLessons.length;
-          const completed = clsLessons.filter(l => l.completed).length;
-          const upcoming = clsLessons.filter(l => !l.completed).sort((a,b)=>{
-            const at = a.scheduledAt ? new Date(a.scheduledAt).getTime() : Infinity;
-            const bt = b.scheduledAt ? new Date(b.scheduledAt).getTime() : Infinity;
-            return at-bt;
-          })[0] || null;
-
-          return (
-            <div key={cls.id} className="bg-gray-50 p-3 rounded-md border border-gray-100">
-              <div className="flex items-start gap-4">
-                <div className="flex-1">
-                  <div className="flex items-center gap-2">
-                    <div className="text-sm font-semibold text-gray-900">{cls.name}</div>
-                    <div className="text-xs text-gray-500 px-2 py-0.5 bg-white border rounded">{cls.type}</div>
-                  </div>
-                  <div className="text-sm text-gray-600 mt-1">{completed}/{total} lessons completed</div>
-                  {upcoming && (
-                    <div className="text-xs text-gray-500 mt-1">Next: {upcoming.title} — {formatDate(upcoming.scheduledAt)}</div>
-                  )}
-                </div>
-
-                <div className="flex items-center gap-3">
-                  <div className="w-36 bg-gray-200 rounded-full h-2 overflow-hidden">
-                    <div
-                      className="bg-green-500 h-2 rounded-full"
-                      style={{ width: total === 0 ? '0%' : `${Math.round((completed/total)*100)}%` }}
-                    />
-                  </div>
-                  <button
-                    onClick={() => toggle(cls.id)}
-                    className="text-sm text-blue-600 hover:underline"
-                  >
-                    {expanded[cls.id] ? 'Hide' : 'View lessons'}
-                  </button>
-                </div>
-              </div>
-
-              {expanded[cls.id] && (
-                <div className="mt-3 border-t border-gray-100 pt-3">
-                  <ul className="space-y-2">
-                    {clsLessons.length === 0 && (
-                      <li className="text-sm text-gray-600">No lessons scheduled for this class.</li>
-                    )}
-                    {clsLessons.map((l) => (
-                      <li key={l.id} className="flex items-center justify-between text-sm">
-                        <div>
-                          <div className="font-medium text-gray-900">Lesson {l.number}: {l.title}</div>
-                          <div className="text-xs text-gray-500">{formatDate(l.scheduledAt)} — {l.completed ? 'Completed' : 'Pending'}</div>
-                        </div>
-                        <div className="text-xs text-gray-600">{l.completed ? '✅' : '⏳'}</div>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-            </div>
-          );
-        })}
-      </div>
-    </div>
-  );
-}

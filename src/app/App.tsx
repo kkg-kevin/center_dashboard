@@ -615,6 +615,32 @@ function CenterDetailView({ center }) {
         />
       </div>
 
+      {/* Student Performance Metrics */}
+      <div className="bg-white rounded-lg border border-[#25476a] shadow-sm">
+        <div className="p-6 border-b border-[#d9e7f2]">
+          <div className="flex items-center gap-2">
+            <Users className="w-5 h-5 text-[#38aae1]" />
+            <h2 className="text-lg font-semibold text-[#25476a]">Student Performance Metrics</h2>
+          </div>
+        </div>
+        <div className="p-6">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            <div className="text-center">
+              <div className="text-sm text-[#5d7690] mb-1">Completion Rate</div>
+              <div className="text-3xl font-bold text-[#25476a]">{center.studentMetrics?.completionRate || 0}%</div>
+            </div>
+            <div className="text-center">
+              <div className="text-sm text-[#5d7690] mb-1">Pass Rate</div>
+              <div className="text-3xl font-bold text-[#25476a]">{center.studentMetrics?.passRate || 0}%</div>
+            </div>
+            <div className="text-center">
+              <div className="text-sm text-[#5d7690] mb-1">Drop Rate</div>
+              <div className="text-3xl font-bold text-[#25476a]">{center.studentMetrics?.dropRate || 0}%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Assignments Section */}
       <div className="bg-white rounded-lg border border-[#25476a]">
         <div className="p-6 border-b border-[#d9e7f2]">
@@ -760,35 +786,6 @@ function CenterDetailView({ center }) {
                 })}
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Student Metrics */}
-      <div className="bg-white rounded-lg border border-[#25476a]">
-        <div className="p-6 border-b border-[#d9e7f2]">
-          <h2 className="text-xl font-semibold text-[#25476a]">Student Performance Metrics</h2>
-        </div>
-        <div className="p-6">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-            <MetricCard
-              label="Completion Rate"
-              value={center.studentMetrics.completionRate}
-              unit="%"
-              color="green"
-            />
-            <MetricCard
-              label="Pass Rate"
-              value={center.studentMetrics.passRate}
-              unit="%"
-              color="blue"
-            />
-            <MetricCard
-              label="Drop Rate"
-              value={center.studentMetrics.dropRate}
-              unit="%"
-              color="red"
-            />
           </div>
         </div>
       </div>

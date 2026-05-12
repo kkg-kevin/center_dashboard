@@ -6,7 +6,7 @@ const mockData = {
   centers: [
     {
       id: 1,
-      name: 'Nairobi Center',
+      name: 'WoodCreek International School',
       branches: [
         { id: 'nai-1', name: 'Nairobi Branch A' },
         { id: 'nai-2', name: 'Nairobi Branch B' },
@@ -28,7 +28,7 @@ const mockData = {
         { id: 'l6', classId: 'nai-quest-2', number: 1, title: 'Quest B Start', scheduledAt: '2026-05-12T10:00:00Z', completed: false }
       ],
       teachers: { total: 45, active: 38, inactive: 7, online: 12 },
-      learners: { total: 320, active: 285, inactive: 35, online: 89 },
+      learners: { total: 320, active: 285, inactive: 35, online: 89, gender: { male: 158, female: 162 } },
       parents: { total: 298, active: 245, inactive: 53, online: 67 },
       technicalMentors: { total: 8, active: 7, inactive: 1, online: 3 },
       assignments: {
@@ -98,10 +98,10 @@ const mockData = {
     },
     {
       id: 2,
-      name: 'Mombasa Center',
+      name: 'Foresight Academy',
       branches: [
-        { id: 'mom-1', name: 'Mombasa Branch A' },
-        { id: 'mom-2', name: 'Mombasa Branch B' }
+        { id: 'mom-1', name: 'Foresight Academy' },
+        { id: 'mom-2', name: 'Foresight Academy' }
       ],
       classes: [
         { id: 'mom-crib-1', name: 'Crib A', type: 'crib' },
@@ -114,7 +114,7 @@ const mockData = {
         { id: 'm-l3', classId: 'mom-clicker-1', number: 1, title: 'Clicker Start', scheduledAt: '2026-05-20T11:00:00Z', completed: false }
       ],
       teachers: { total: 32, active: 28, inactive: 4, online: 9 },
-      learners: { total: 245, active: 218, inactive: 27, online: 65 },
+      learners: { total: 245, active: 218, inactive: 27, online: 65, gender: { male: 118, female: 127 } },
       parents: { total: 228, active: 195, inactive: 33, online: 52 },
       technicalMentors: { total: 6, active: 6, inactive: 0, online: 2 },
       assignments: {
@@ -174,7 +174,7 @@ const mockData = {
     },
     {
       id: 3,
-      name: 'Kisumu Center',
+      name: 'Holy Trinity Academy Kericho',
       branches: [
         { id: 'kis-1', name: 'Kisumu Branch A' }
       ],
@@ -188,7 +188,7 @@ const mockData = {
         { id: 'k-l3', classId: 'kis-quest-1', number: 1, title: 'Quest 1', scheduledAt: '2026-05-14T09:00:00Z', completed: false }
       ],
       teachers: { total: 28, active: 24, inactive: 4, online: 7 },
-      learners: { total: 198, active: 172, inactive: 26, online: 48 },
+      learners: { total: 198, active: 172, inactive: 26, online: 48, gender: { male: 95, female: 103 } },
       parents: { total: 185, active: 158, inactive: 27, online: 41 },
       technicalMentors: { total: 5, active: 5, inactive: 0, online: 2 },
       assignments: {
@@ -238,7 +238,7 @@ const mockData = {
     },
     {
       id: 4,
-      name: 'Eldoret Center',
+      name: 'Heroes of The nation',
       branches: [
         { id: 'eld-1', name: 'Eldoret Branch A' },
         { id: 'eld-2', name: 'Eldoret Branch B' }
@@ -252,7 +252,7 @@ const mockData = {
         { id: 'e-l2', classId: 'eld-clicker-1', number: 1, title: 'Clicker Intro', scheduledAt: '2026-05-18T11:00:00Z', completed: false }
       ],
       teachers: { total: 22, active: 19, inactive: 3, online: 6 },
-      learners: { total: 165, active: 148, inactive: 17, online: 42 },
+      learners: { total: 165, active: 148, inactive: 17, online: 42, gender: { male: 78, female: 87 } },
       parents: { total: 152, active: 132, inactive: 20, online: 35 },
       technicalMentors: { total: 4, active: 4, inactive: 0, online: 1 },
       assignments: {
@@ -350,11 +350,22 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#f4f8fb] p-4 md:p-8">
-      <div className="max-w-7xl mx-auto">
+      <div className="w-full">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-[#25476a] mb-2">Digifunzi Centers Dashboard</h1>
-          <p className="text-[#5d7690]">Overview and insights across all learning centers</p>
+          <div className="flex flex-col items-start gap-3 mb-2">
+            <img 
+              src="/src/assets/images/Logo-image.png" 
+              alt="Digifunzi Logo" 
+              className="h-20 w-auto"
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.style.display = 'none';
+              }}
+            />
+            <h1 className="text-2xl font-bold text-[#25476a]">Digifunzi Centers Dashboard</h1>
+            <p className="text-[#25476a] font-medium">Overview and insights across all learning centers</p>
+          </div>
         </div>
 
         {/* Content Area */}
@@ -373,37 +384,17 @@ export default function App() {
             <div className="mb-6 flex items-center gap-4">
               <button
                 onClick={handleBackToOverview}
-                className="bg-white border border-[#d9e7f2] rounded-lg px-4 py-2 flex items-center gap-2 hover:bg-[#e9f6fc] transition-colors"
+                className="bg-white border border-[#25476a] rounded-lg px-4 py-2 flex items-center gap-2 hover:bg-[#f4f8fb] transition-colors"
               >
-                <ChevronDown className="w-4 h-4 text-[#38aae1] rotate-90" />
+                <ChevronDown className="w-4 h-4 text-[#25476a] rotate-90" />
                 <span className="text-[#25476a]">Back to Overview</span>
               </button>
               
-              {/* Center Selector */}
-              <div className="relative inline-block">
-                <button
-                  onClick={() => setDropdownOpen(!dropdownOpen)}
-                  className="bg-white border border-[#d9e7f2] rounded-lg px-4 py-2 flex items-center gap-2 hover:bg-[#e9f6fc] transition-colors min-w-64"
-                >
-                  <span className="text-[#25476a]">
-                    {selectedCenter.name}
-                  </span>
-                  <ChevronDown className="w-4 h-4 text-[#38aae1]" />
-                </button>
-
-                {dropdownOpen && (
-                  <div className="absolute top-full mt-2 bg-white border border-[#d9e7f2] rounded-lg shadow-lg z-10 min-w-64">
-                    {mockData.centers.map((center) => (
-                      <button
-                        key={center.id}
-                        onClick={() => handleCenterSelect(center)}
-                        className="w-full text-left px-4 py-2 hover:bg-[#e9f6fc] text-[#25476a]"
-                      >
-                        {center.name}
-                      </button>
-                    ))}
-                  </div>
-                )}
+              {/* Center Name */}
+              <div className="bg-white border border-[#25476a] rounded-lg px-4 py-2 min-w-64">
+                <span className="text-[#25476a] font-medium">
+                  {selectedCenter.name}
+                </span>
               </div>
             </div>
             <CenterDetailView center={selectedCenter} />
@@ -426,7 +417,7 @@ function OverviewView({ centers, totals, dropdownOpen, setDropdownOpen, handleCe
   return (
     <div className="space-y-6">
       {/* All Users Overview */}
-      <div className="bg-white rounded-lg border border-[#d9e7f2]">
+      <div className="bg-white rounded-lg border border-[#25476a]">
         <div className="p-6 border-b border-[#d9e7f2]">
           <div className="flex items-center gap-2">
             <Users className="w-5 h-5 text-[#38aae1]" />
@@ -459,7 +450,7 @@ function OverviewView({ centers, totals, dropdownOpen, setDropdownOpen, handleCe
       <div className="relative inline-block">
         <button
           onClick={() => setDropdownOpen(!dropdownOpen)}
-          className="bg-white border border-[#d9e7f2] rounded-lg px-4 py-2 flex items-center gap-2 hover:bg-[#e9f6fc] transition-colors min-w-64"
+          className="bg-white border border-[#25476a] rounded-lg px-4 py-2 flex items-center gap-2 hover:bg-[#e9f6fc] transition-colors min-w-64"
         >
           <span className="text-[#25476a]">
             All Centers Overview
@@ -468,7 +459,7 @@ function OverviewView({ centers, totals, dropdownOpen, setDropdownOpen, handleCe
         </button>
 
         {dropdownOpen && (
-          <div className="absolute top-full mt-2 bg-white border border-[#d9e7f2] rounded-lg shadow-lg z-10 min-w-64">
+          <div className="absolute top-full mt-2 bg-white border border-[#25476a] rounded-lg shadow-lg z-10 min-w-64">
             <button
               onClick={handleBackToOverview}
               className="w-full text-left px-4 py-2 hover:bg-[#e9f6fc] border-b border-[#d9e7f2] text-[#25476a]"
@@ -517,7 +508,7 @@ function OverviewView({ centers, totals, dropdownOpen, setDropdownOpen, handleCe
       </div>
 
       {/* Centers Table */}
-      <div className="bg-white rounded-lg border border-[#d9e7f2]">
+      <div className="bg-white rounded-lg border border-[#25476a]">
         <div className="p-6 border-b border-[#d9e7f2]">
           <h2 className="text-xl font-semibold text-[#25476a]">Centers Overview</h2>
         </div>
@@ -624,8 +615,69 @@ function CenterDetailView({ center }) {
         />
       </div>
 
+      {/* Gender Distribution */}
+      <div className="bg-white rounded-lg border border-[#25476a]">
+        <div className="p-6 border-b border-[#d9e7f2]">
+          <div className="flex items-center gap-2">
+            <Users className="w-5 h-5 text-[#38aae1]" />
+            <h2 className="text-xl font-semibold text-[#25476a]">Student Gender Distribution</h2>
+          </div>
+        </div>
+        <div className="p-6">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            <div className="text-center">
+              <div className="text-2xl font-bold text-[#25476a]">{center.learners.gender?.male || 0}</div>
+              <div className="text-sm text-gray-600">Male Students</div>
+              <div className="text-xs text-gray-500">
+                {((center.learners.gender?.male || 0) / center.learners.total * 100).toFixed(1)}%
+              </div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl font-bold text-[#25476a]">{center.learners.gender?.female || 0}</div>
+              <div className="text-sm text-gray-600">Female Students</div>
+              <div className="text-xs text-gray-500">
+                {((center.learners.gender?.female || 0) / center.learners.total * 100).toFixed(1)}%
+              </div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl font-bold text-[#38aae1]">{center.learners.total}</div>
+              <div className="text-sm text-gray-600">Total Students</div>
+              <div className="text-xs text-gray-500">100%</div>
+            </div>
+          </div>
+          
+          {/* Visual representation */}
+          <div className="mt-6">
+            <div className="flex h-8 rounded-lg overflow-hidden">
+              <div 
+                className="bg-blue-500 flex items-center justify-center text-white text-sm font-medium"
+                style={{ width: `${((center.learners.gender?.male || 0) / center.learners.total * 100).toFixed(1)}%` }}
+              >
+                {((center.learners.gender?.male || 0) / center.learners.total * 100).toFixed(1)}%
+              </div>
+              <div 
+                className="bg-pink-500 flex items-center justify-center text-white text-sm font-medium"
+                style={{ width: `${((center.learners.gender?.female || 0) / center.learners.total * 100).toFixed(1)}%` }}
+              >
+                {((center.learners.gender?.female || 0) / center.learners.total * 100).toFixed(1)}%
+              </div>
+            </div>
+            <div className="flex justify-between mt-2">
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 bg-blue-500 rounded"></div>
+                <span className="text-sm text-gray-600">Male</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 bg-pink-500 rounded"></div>
+                <span className="text-sm text-gray-600">Female</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Assignments Section */}
-      <div className="bg-white rounded-lg border border-[#d9e7f2]">
+      <div className="bg-white rounded-lg border border-[#25476a]">
         <div className="p-6 border-b border-[#d9e7f2]">
           <div className="flex items-center gap-2">
             <FileText className="w-5 h-5 text-[#38aae1]" />
@@ -657,12 +709,12 @@ function CenterDetailView({ center }) {
             <h3 className="text-sm font-medium text-[#25476a] mb-3">Weekly Breakdown</h3>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {/* Latest Week Summary */}
-              <div className="bg-[#f4f8fb] rounded-lg border border-[#d9e7f2] p-4">
+              <div className="bg-[#f4f8fb] rounded-lg border border-[#25476a] p-4">
                 <div className="flex items-center justify-between mb-4">
                   <h4 className="text-lg font-semibold text-[#25476a]">
                     {center.weeklyAssignments[center.weeklyAssignments.length - 1]?.week || 'Current Week'}
                   </h4>
-                  <div className="text-xs text-[#38aae1] bg-white px-2 py-1 rounded border border-[#d9e7f2]">
+                  <div className="text-xs text-[#38aae1] bg-white px-2 py-1 rounded border border-[#25476a]">
                     Latest Week
                   </div>
                 </div>
@@ -697,7 +749,7 @@ function CenterDetailView({ center }) {
               </div>
 
               {/* Weekly Activity Summary */}
-              <div className="bg-white rounded-lg border border-[#d9e7f2] p-4">
+              <div className="bg-white rounded-lg border border-[#25476a] p-4">
                 <h4 className="text-lg font-semibold text-[#25476a] mb-4">This Week's Activity</h4>
                 <div className="space-y-3">
                   <div className="flex items-center justify-between p-3 bg-[#e9f6fc] rounded-lg">
@@ -747,7 +799,7 @@ function CenterDetailView({ center }) {
                 {center.weeklyAssignments.slice(0, -1).reverse().slice(0, 3).map((week, index) => {
                   const completionPercentage = ((week.graded / week.issued) * 100).toFixed(1);
                   return (
-                    <div key={index} className="bg-white border border-[#d9e7f2] rounded-lg p-4">
+                    <div key={index} className="bg-white border border-[#25476a] rounded-lg p-4">
                       <div className="flex items-center justify-between mb-3">
                         <h5 className="text-sm font-semibold text-[#25476a]">{week.week}</h5>
                         <span className="text-lg font-bold text-[#38aae1]">{completionPercentage}%</span>
@@ -774,7 +826,7 @@ function CenterDetailView({ center }) {
       </div>
 
       {/* Student Metrics */}
-      <div className="bg-white rounded-lg border border-[#d9e7f2]">
+      <div className="bg-white rounded-lg border border-[#25476a]">
         <div className="p-6 border-b border-[#d9e7f2]">
           <h2 className="text-xl font-semibold text-[#25476a]">Student Performance Metrics</h2>
         </div>
@@ -803,7 +855,7 @@ function CenterDetailView({ center }) {
       </div>
 
       {/* QA Visits */}
-      <div className="bg-white rounded-lg border border-[#d9e7f2]">
+      <div className="bg-white rounded-lg border border-[#25476a]">
         <div className="p-6 border-b border-[#d9e7f2]">
           <div className="flex items-center gap-2">
             <ClipboardList className="w-5 h-5 text-[#38aae1]" />
@@ -824,10 +876,10 @@ function CenterDetailView({ center }) {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Weekly QA Stats */}
-            <div className="bg-[#f4f8fb] rounded-lg border border-[#d9e7f2] p-4">
+            <div className="bg-[#f4f8fb] rounded-lg border border-[#25476a] p-4">
               <div className="flex items-center justify-between mb-4">
                 <h4 className="text-lg font-semibold text-[#25476a]">This Week's QA Activity</h4>
-                <div className="text-xs text-[#38aae1] bg-white px-2 py-1 rounded border border-[#d9e7f2]">
+                <div className="text-xs text-[#38aae1] bg-white px-2 py-1 rounded border border-[#25476a]">
                   Last 7 Days
                 </div>
               </div>
@@ -861,11 +913,11 @@ function CenterDetailView({ center }) {
             </div>
 
             {/* Recent QA Visits */}
-            <div className="bg-white rounded-lg border border-[#d9e7f2] p-4">
+            <div className="bg-white rounded-lg border border-[#25476a] p-4">
               <h4 className="text-lg font-semibold text-[#25476a] mb-4">Recent QA Visits</h4>
               <div className="space-y-3">
                 {(center.qaVisits.weeklyVisits || []).concat(center.qaVisits.recentVisits || []).slice(0, 2).map((visit) => (
-                  <div key={visit.id} className="border border-[#d9e7f2] rounded-lg p-3">
+                  <div key={visit.id} className="border border-[#25476a] rounded-lg p-3">
                     <div className="flex items-center justify-between mb-2">
                       <div className="flex items-center gap-2">
                         <div className={`w-2 h-2 rounded-full ${
@@ -917,7 +969,7 @@ function SummaryCard({ icon, label, value, color }) {
   };
 
   return (
-    <div className="bg-white rounded-lg border border-[#d9e7f2] p-6">
+    <div className="bg-white rounded-lg border border-[#25476a] p-6">
       <div className={`w-12 h-12 rounded-lg ${colors[color]} flex items-center justify-center mb-3`}>
         {icon}
       </div>
@@ -936,7 +988,7 @@ function RoleStatsCard({ title, icon, stats, color }) {
   };
 
   return (
-    <div className="bg-white rounded-lg border border-[#d9e7f2]">
+    <div className="bg-white rounded-lg border border-[#25476a]">
       <div className="p-6 border-b border-[#d9e7f2]">
         <div className="flex items-center gap-2">
           <div className={`w-10 h-10 rounded-lg ${colors[color]} flex items-center justify-center`}>
@@ -946,23 +998,67 @@ function RoleStatsCard({ title, icon, stats, color }) {
         </div>
       </div>
       <div className="p-6">
-        <div className="grid grid-cols-2 gap-4">
-          <div>
-            <div className="text-sm text-[#5d7690] mb-1">Total</div>
-            <div className="text-2xl font-bold text-[#25476a]">{stats.total}</div>
+        <div className="flex gap-6">
+          {/* Left side - Main statistics */}
+          <div className="flex-1">
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <div className="text-sm text-[#5d7690] mb-1">Total</div>
+                <div className="text-2xl font-bold text-[#25476a]">{stats.total}</div>
+              </div>
+              <div>
+                <div className="text-sm text-[#5d7690] mb-1">Active (90 days)</div>
+                <div className="text-2xl font-bold text-[#25476a]">{stats.active}</div>
+              </div>
+              <div>
+                <div className="text-sm text-[#5d7690] mb-1">Inactive (90 days)</div>
+                <div className="text-2xl font-bold text-[#25476a]">{stats.inactive}</div>
+              </div>
+              <div>
+                <div className="text-sm text-[#5d7690] mb-1">Online (today)</div>
+                <div className="text-2xl font-bold text-[#25476a]">{stats.online}</div>
+              </div>
+            </div>
           </div>
-          <div>
-            <div className="text-sm text-[#5d7690] mb-1">Active (90 days)</div>
-            <div className="text-2xl font-bold text-[#25476a]">{stats.active}</div>
-          </div>
-          <div>
-            <div className="text-sm text-[#5d7690] mb-1">Inactive (90 days)</div>
-            <div className="text-2xl font-bold text-[#25476a]">{stats.inactive}</div>
-          </div>
-          <div>
-            <div className="text-sm text-[#5d7690] mb-1">Online (today)</div>
-            <div className="text-2xl font-bold text-[#25476a]">{stats.online}</div>
-          </div>
+          
+          {/* Right side - Gender Distribution for Learners */}
+          {title === 'Learners' && stats.gender && (
+            <div className="w-32 border-l border-[#d9e7f2] pl-4">
+              <div className="text-xs font-medium text-[#25476a] mb-2">Gender</div>
+              <div className="space-y-2">
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-[#25476a] rounded-full"></div>
+                  <span className="text-xs text-[#5d7690]">M:</span>
+                  <span className="text-sm font-bold text-[#25476a]">{stats.gender.male}</span>
+                  <span className="text-xs text-[#38aae1]">
+                    {((stats.gender.male / stats.total) * 100).toFixed(1)}%
+                  </span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-[#feb139] rounded-full"></div>
+                  <span className="text-xs text-[#5d7690]">F:</span>
+                  <span className="text-sm font-bold text-[#25476a]">{stats.gender.female}</span>
+                  <span className="text-xs text-[#38aae1]">
+                    {((stats.gender.female / stats.total) * 100).toFixed(1)}%
+                  </span>
+                </div>
+              </div>
+              
+              {/* Compact visual representation */}
+              <div className="mt-3">
+                <div className="flex h-2 rounded-full overflow-hidden">
+                  <div 
+                    className="bg-[#25476a]"
+                    style={{ width: `${((stats.gender.male / stats.total) * 100).toFixed(1)}%` }}
+                  />
+                  <div 
+                    className="bg-[#feb139]"
+                    style={{ width: `${((stats.gender.female / stats.total) * 100).toFixed(1)}%` }}
+                  />
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

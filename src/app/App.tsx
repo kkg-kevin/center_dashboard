@@ -6,7 +6,7 @@ const mockData = {
   centers: [
     {
       id: 1,
-      name: 'Nairobi Center',
+      name: 'WoodCreek International School',
       branches: [
         { id: 'nai-1', name: 'Nairobi Branch A' },
         { id: 'nai-2', name: 'Nairobi Branch B' },
@@ -98,7 +98,7 @@ const mockData = {
     },
     {
       id: 2,
-      name: 'Mombasa Center',
+      name: 'Foresight Academy',
       branches: [
         { id: 'mom-1', name: 'Mombasa Branch A' },
         { id: 'mom-2', name: 'Mombasa Branch B' }
@@ -174,7 +174,7 @@ const mockData = {
     },
     {
       id: 3,
-      name: 'Kisumu Center',
+      name: 'Holy Trinity Academy Kericho',
       branches: [
         { id: 'kis-1', name: 'Kisumu Branch A' }
       ],
@@ -238,7 +238,7 @@ const mockData = {
     },
     {
       id: 4,
-      name: 'Eldoret Center',
+      name: 'Heroes of The nation',
       branches: [
         { id: 'eld-1', name: 'Eldoret Branch A' },
         { id: 'eld-2', name: 'Eldoret Branch B' }

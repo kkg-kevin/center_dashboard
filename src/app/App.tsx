@@ -350,11 +350,22 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#f4f8fb] p-4 md:p-8">
-      <div className="max-w-7xl mx-auto">
+      <div className="w-full">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-[#25476a] mb-2">Digifunzi Centers Dashboard</h1>
-          <p className="text-[#5d7690]">Overview and insights across all learning centers</p>
+          <div className="flex flex-col items-start gap-3 mb-2">
+            <img 
+              src="/src/assets/images/Logo-image.png" 
+              alt="Digifunzi Logo" 
+              className="h-20 w-auto"
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.style.display = 'none';
+              }}
+            />
+            <h1 className="text-2xl font-bold text-[#25476a]">Digifunzi Centers Dashboard</h1>
+            <p className="text-[#25476a] font-medium">Overview and insights across all learning centers</p>
+          </div>
         </div>
 
         {/* Content Area */}
@@ -373,9 +384,9 @@ export default function App() {
             <div className="mb-6 flex items-center gap-4">
               <button
                 onClick={handleBackToOverview}
-                className="bg-white border border-[#d9e7f2] rounded-lg px-4 py-2 flex items-center gap-2 hover:bg-[#e9f6fc] transition-colors"
+                className="bg-white border border-[#25476a] rounded-lg px-4 py-2 flex items-center gap-2 hover:bg-[#f4f8fb] transition-colors"
               >
-                <ChevronDown className="w-4 h-4 text-[#38aae1] rotate-90" />
+                <ChevronDown className="w-4 h-4 text-[#25476a] rotate-90" />
                 <span className="text-[#25476a]">Back to Overview</span>
               </button>
               
@@ -383,21 +394,21 @@ export default function App() {
               <div className="relative inline-block">
                 <button
                   onClick={() => setDropdownOpen(!dropdownOpen)}
-                  className="bg-white border border-[#d9e7f2] rounded-lg px-4 py-2 flex items-center gap-2 hover:bg-[#e9f6fc] transition-colors min-w-64"
+                  className="bg-white border border-[#25476a] rounded-lg px-4 py-2 flex items-center gap-2 hover:bg-[#e9f6fc] transition-colors min-w-64"
                 >
                   <span className="text-[#25476a]">
                     {selectedCenter.name}
                   </span>
-                  <ChevronDown className="w-4 h-4 text-[#38aae1]" />
+                  <ChevronDown className="w-4 h-4 text-[#25476a]" />
                 </button>
 
                 {dropdownOpen && (
-                  <div className="absolute top-full mt-2 bg-white border border-[#d9e7f2] rounded-lg shadow-lg z-10 min-w-64">
+                  <div className="absolute top-full mt-2 bg-white border border-[#25476a] rounded-lg shadow-lg z-10 min-w-64">
                     {mockData.centers.map((center) => (
                       <button
                         key={center.id}
                         onClick={() => handleCenterSelect(center)}
-                        className="w-full text-left px-4 py-2 hover:bg-[#e9f6fc] text-[#25476a]"
+                        className="w-full text-left px-4 py-2 hover:bg-[#f4f8fb] text-[#25476a] font-medium"
                       >
                         {center.name}
                       </button>
@@ -426,7 +437,7 @@ function OverviewView({ centers, totals, dropdownOpen, setDropdownOpen, handleCe
   return (
     <div className="space-y-6">
       {/* All Users Overview */}
-      <div className="bg-white rounded-lg border border-[#d9e7f2]">
+      <div className="bg-white rounded-lg border border-[#25476a]">
         <div className="p-6 border-b border-[#d9e7f2]">
           <div className="flex items-center gap-2">
             <Users className="w-5 h-5 text-[#38aae1]" />
@@ -459,7 +470,7 @@ function OverviewView({ centers, totals, dropdownOpen, setDropdownOpen, handleCe
       <div className="relative inline-block">
         <button
           onClick={() => setDropdownOpen(!dropdownOpen)}
-          className="bg-white border border-[#d9e7f2] rounded-lg px-4 py-2 flex items-center gap-2 hover:bg-[#e9f6fc] transition-colors min-w-64"
+          className="bg-white border border-[#25476a] rounded-lg px-4 py-2 flex items-center gap-2 hover:bg-[#e9f6fc] transition-colors min-w-64"
         >
           <span className="text-[#25476a]">
             All Centers Overview
@@ -468,7 +479,7 @@ function OverviewView({ centers, totals, dropdownOpen, setDropdownOpen, handleCe
         </button>
 
         {dropdownOpen && (
-          <div className="absolute top-full mt-2 bg-white border border-[#d9e7f2] rounded-lg shadow-lg z-10 min-w-64">
+          <div className="absolute top-full mt-2 bg-white border border-[#25476a] rounded-lg shadow-lg z-10 min-w-64">
             <button
               onClick={handleBackToOverview}
               className="w-full text-left px-4 py-2 hover:bg-[#e9f6fc] border-b border-[#d9e7f2] text-[#25476a]"
@@ -517,7 +528,7 @@ function OverviewView({ centers, totals, dropdownOpen, setDropdownOpen, handleCe
       </div>
 
       {/* Centers Table */}
-      <div className="bg-white rounded-lg border border-[#d9e7f2]">
+      <div className="bg-white rounded-lg border border-[#25476a]">
         <div className="p-6 border-b border-[#d9e7f2]">
           <h2 className="text-xl font-semibold text-[#25476a]">Centers Overview</h2>
         </div>
@@ -625,7 +636,7 @@ function CenterDetailView({ center }) {
       </div>
 
       {/* Assignments Section */}
-      <div className="bg-white rounded-lg border border-[#d9e7f2]">
+      <div className="bg-white rounded-lg border border-[#25476a]">
         <div className="p-6 border-b border-[#d9e7f2]">
           <div className="flex items-center gap-2">
             <FileText className="w-5 h-5 text-[#38aae1]" />
@@ -657,12 +668,12 @@ function CenterDetailView({ center }) {
             <h3 className="text-sm font-medium text-[#25476a] mb-3">Weekly Breakdown</h3>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {/* Latest Week Summary */}
-              <div className="bg-[#f4f8fb] rounded-lg border border-[#d9e7f2] p-4">
+              <div className="bg-[#f4f8fb] rounded-lg border border-[#25476a] p-4">
                 <div className="flex items-center justify-between mb-4">
                   <h4 className="text-lg font-semibold text-[#25476a]">
                     {center.weeklyAssignments[center.weeklyAssignments.length - 1]?.week || 'Current Week'}
                   </h4>
-                  <div className="text-xs text-[#38aae1] bg-white px-2 py-1 rounded border border-[#d9e7f2]">
+                  <div className="text-xs text-[#38aae1] bg-white px-2 py-1 rounded border border-[#25476a]">
                     Latest Week
                   </div>
                 </div>
@@ -697,7 +708,7 @@ function CenterDetailView({ center }) {
               </div>
 
               {/* Weekly Activity Summary */}
-              <div className="bg-white rounded-lg border border-[#d9e7f2] p-4">
+              <div className="bg-white rounded-lg border border-[#25476a] p-4">
                 <h4 className="text-lg font-semibold text-[#25476a] mb-4">This Week's Activity</h4>
                 <div className="space-y-3">
                   <div className="flex items-center justify-between p-3 bg-[#e9f6fc] rounded-lg">
@@ -747,7 +758,7 @@ function CenterDetailView({ center }) {
                 {center.weeklyAssignments.slice(0, -1).reverse().slice(0, 3).map((week, index) => {
                   const completionPercentage = ((week.graded / week.issued) * 100).toFixed(1);
                   return (
-                    <div key={index} className="bg-white border border-[#d9e7f2] rounded-lg p-4">
+                    <div key={index} className="bg-white border border-[#25476a] rounded-lg p-4">
                       <div className="flex items-center justify-between mb-3">
                         <h5 className="text-sm font-semibold text-[#25476a]">{week.week}</h5>
                         <span className="text-lg font-bold text-[#38aae1]">{completionPercentage}%</span>
@@ -774,7 +785,7 @@ function CenterDetailView({ center }) {
       </div>
 
       {/* Student Metrics */}
-      <div className="bg-white rounded-lg border border-[#d9e7f2]">
+      <div className="bg-white rounded-lg border border-[#25476a]">
         <div className="p-6 border-b border-[#d9e7f2]">
           <h2 className="text-xl font-semibold text-[#25476a]">Student Performance Metrics</h2>
         </div>
@@ -803,7 +814,7 @@ function CenterDetailView({ center }) {
       </div>
 
       {/* QA Visits */}
-      <div className="bg-white rounded-lg border border-[#d9e7f2]">
+      <div className="bg-white rounded-lg border border-[#25476a]">
         <div className="p-6 border-b border-[#d9e7f2]">
           <div className="flex items-center gap-2">
             <ClipboardList className="w-5 h-5 text-[#38aae1]" />
@@ -824,10 +835,10 @@ function CenterDetailView({ center }) {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Weekly QA Stats */}
-            <div className="bg-[#f4f8fb] rounded-lg border border-[#d9e7f2] p-4">
+            <div className="bg-[#f4f8fb] rounded-lg border border-[#25476a] p-4">
               <div className="flex items-center justify-between mb-4">
                 <h4 className="text-lg font-semibold text-[#25476a]">This Week's QA Activity</h4>
-                <div className="text-xs text-[#38aae1] bg-white px-2 py-1 rounded border border-[#d9e7f2]">
+                <div className="text-xs text-[#38aae1] bg-white px-2 py-1 rounded border border-[#25476a]">
                   Last 7 Days
                 </div>
               </div>
@@ -861,11 +872,11 @@ function CenterDetailView({ center }) {
             </div>
 
             {/* Recent QA Visits */}
-            <div className="bg-white rounded-lg border border-[#d9e7f2] p-4">
+            <div className="bg-white rounded-lg border border-[#25476a] p-4">
               <h4 className="text-lg font-semibold text-[#25476a] mb-4">Recent QA Visits</h4>
               <div className="space-y-3">
                 {(center.qaVisits.weeklyVisits || []).concat(center.qaVisits.recentVisits || []).slice(0, 2).map((visit) => (
-                  <div key={visit.id} className="border border-[#d9e7f2] rounded-lg p-3">
+                  <div key={visit.id} className="border border-[#25476a] rounded-lg p-3">
                     <div className="flex items-center justify-between mb-2">
                       <div className="flex items-center gap-2">
                         <div className={`w-2 h-2 rounded-full ${
@@ -917,7 +928,7 @@ function SummaryCard({ icon, label, value, color }) {
   };
 
   return (
-    <div className="bg-white rounded-lg border border-[#d9e7f2] p-6">
+    <div className="bg-white rounded-lg border border-[#25476a] p-6">
       <div className={`w-12 h-12 rounded-lg ${colors[color]} flex items-center justify-center mb-3`}>
         {icon}
       </div>
@@ -936,7 +947,7 @@ function RoleStatsCard({ title, icon, stats, color }) {
   };
 
   return (
-    <div className="bg-white rounded-lg border border-[#d9e7f2]">
+    <div className="bg-white rounded-lg border border-[#25476a]">
       <div className="p-6 border-b border-[#d9e7f2]">
         <div className="flex items-center gap-2">
           <div className={`w-10 h-10 rounded-lg ${colors[color]} flex items-center justify-center`}>

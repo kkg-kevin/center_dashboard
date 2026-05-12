@@ -615,67 +615,6 @@ function CenterDetailView({ center }) {
         />
       </div>
 
-      {/* Gender Distribution */}
-      <div className="bg-white rounded-lg border border-[#25476a]">
-        <div className="p-6 border-b border-[#d9e7f2]">
-          <div className="flex items-center gap-2">
-            <Users className="w-5 h-5 text-[#38aae1]" />
-            <h2 className="text-xl font-semibold text-[#25476a]">Student Gender Distribution</h2>
-          </div>
-        </div>
-        <div className="p-6">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-            <div className="text-center">
-              <div className="text-2xl font-bold text-[#25476a]">{center.learners.gender?.male || 0}</div>
-              <div className="text-sm text-gray-600">Male Students</div>
-              <div className="text-xs text-gray-500">
-                {((center.learners.gender?.male || 0) / center.learners.total * 100).toFixed(1)}%
-              </div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-[#25476a]">{center.learners.gender?.female || 0}</div>
-              <div className="text-sm text-gray-600">Female Students</div>
-              <div className="text-xs text-gray-500">
-                {((center.learners.gender?.female || 0) / center.learners.total * 100).toFixed(1)}%
-              </div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-[#38aae1]">{center.learners.total}</div>
-              <div className="text-sm text-gray-600">Total Students</div>
-              <div className="text-xs text-gray-500">100%</div>
-            </div>
-          </div>
-          
-          {/* Visual representation */}
-          <div className="mt-6">
-            <div className="flex h-8 rounded-lg overflow-hidden">
-              <div 
-                className="bg-blue-500 flex items-center justify-center text-white text-sm font-medium"
-                style={{ width: `${((center.learners.gender?.male || 0) / center.learners.total * 100).toFixed(1)}%` }}
-              >
-                {((center.learners.gender?.male || 0) / center.learners.total * 100).toFixed(1)}%
-              </div>
-              <div 
-                className="bg-pink-500 flex items-center justify-center text-white text-sm font-medium"
-                style={{ width: `${((center.learners.gender?.female || 0) / center.learners.total * 100).toFixed(1)}%` }}
-              >
-                {((center.learners.gender?.female || 0) / center.learners.total * 100).toFixed(1)}%
-              </div>
-            </div>
-            <div className="flex justify-between mt-2">
-              <div className="flex items-center gap-2">
-                <div className="w-3 h-3 bg-blue-500 rounded"></div>
-                <span className="text-sm text-gray-600">Male</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-3 h-3 bg-pink-500 rounded"></div>
-                <span className="text-sm text-gray-600">Female</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
       {/* Assignments Section */}
       <div className="bg-white rounded-lg border border-[#25476a]">
         <div className="p-6 border-b border-[#d9e7f2]">
